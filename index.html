@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koolo Store Premium</title>
+<style>
+/* ====== ESTILOS PREMIUM ====== */
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+}header { display:flex; justify-content: space-between; align-items:center; padding:10px 20px; background-color: #fff; color: #000; border-bottom: 1px solid #000; }
+
+.header-left img { height:50px; } .header-left a { margin-right:15px; text-decoration:none; color:black; font-weight:bold; transition: color 0.3s; } .header-left a:hover { color: gray; } .header-right button { margin-left:10px; padding:5px 12px; cursor:pointer; background-color: #000; color: #fff; border:none; border-radius:4px; transition: background 0.3s; } .header-right button:hover { background-color: #333; }
+
+main#products { display:flex; flex-wrap:wrap; gap:20px; padding:20px; justify-content:center; } .product { border:1px solid #000; padding:10px; width:180px; text-align:center; transition: transform 0.3s, box-shadow 0.3s; } .product:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); } .product img { width:120px; height:120px; } .product button { background-color: #000; color: #fff; border:none; padding:5px 10px; cursor:pointer; margin-top:5px; } .product button:hover { background-color: #333; }
+
+aside#cart { display:none; position:fixed; top:70px; right:10px; background:#fff; border:1px solid #000; padding:15px; width:280px; max-height:400px; overflow:auto; z-index:100; } aside#cart.open { display:block; }
+
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+
+.modal-content { background-color: #fff; margin: 10% auto; padding: 20px; width: 360px; border-radius: 5px; }
+
+#close-login, #close-admin, #close-admin-panel { float: right; font-size: 20px; cursor: pointer; }
+
+#admin-panel input { width: 100%; margin: 5px 0; padding: 5px; box-sizing: border-box; } #admin-panel button { margin-top: 10px; padding: 8px 12px; background-color: black; color: white; border: none; cursor: pointer; } .admin-product { border:1px solid #ccc; padding:5px; margin-bottom:5px; } .admin-product img { width: 50px; height: 50px; display: block; margin-bottom:5px; } </style>
+
+</head>
+<body><header>
+  <div class="header-left">
+    <img src="img/logo.png" id="logo" alt="Koolo Logo">
+    <a href="#" id="inicio-btn">Inicio</a>
+    <a href="#" id="categorias-btn">Categorías</a>
+  </div>
+  <div class="header-right">
+    <button id="login-btn">Login</button>
+    <button id="cartBtn">🛒 <span id="cart-count">0</span></button>
+    <button id="admin-btn" style="display:none;">Admin</button>
+  </div>
+</header><main id="products"></main><aside id="cart">
+  <div class="modal-content">
+    <h3>Carrito</h3>
+    <div id="cartItems"></div>
+    <h4>Métodos de pago</h4>
+    <div id="payment-methods"></div>
+  </div>
+</aside><div id="login-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-login">&times;</span>
+    <h3>Registro / Login</h3>
+    <input type="text" id="reg-name" placeholder="Nombre">
+    <input type="email" id="login-email" placeholder="Correo">
+    <input type="password" id="login-pass" placeholder="Contraseña">
+    <input type="text" id="reg-address" placeholder="Dirección de envío">
+    <button id="login-submit">Registrarse / Entrar</button>
+  </div>
+</div><div id="admin-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-admin">&times;</span>
+    <h3>Admin Login</h3>
+    <input type="password" id="admin-pass" placeholder="Contraseña admin">
+    <button id="admin-login-submit">Entrar</button>
+  </div>
+</div><div id="admin-panel" class="modal">
+  <div class="modal-content">
+    <span id="close-admin-panel">&times;</span>
+    <h3>Mini Admin Premium</h3>
+    <label>Logo URL:</label>
+    <input type="text" id="admin-logo" placeholder="img/logo.png">
+    <label>Color cabecera:</label>
+    <input type="color" id="admin-color" value="#ffffff">
+    <label>Instagram URL:</label>
+    <input type="text" id="admin-instagram" placeholder="https://instagram.com/...">
+    <h4>Productos</h4>
+    <div id="admin-products"></div>
+    <button id="admin-add-product">Añadir producto</button>
+    <h4>Métodos de pago</h4>
+    <div id="admin-payments">
+      <input type="file" id="add-payment" multiple>
+      <button id="admin-add-payment">Añadir</button>
+    </div>
+    <button id="admin-save">Guardar cambios</button>
+  </div>
+</div><script>
+// ====== JS PREMIUM ======
+let products = [
+  {name:"Camiseta Koolo",price:20,img:"img/camiseta.png"},
+  {name:"Sudadera Koolo",price:35,img:"img/sudadera.png"},
+  {name:"Gorra Koolo",price:15,img:"img/gorra.png"}
+];
+
+let paymentMethods = [];
+let cart = [];
+const ADMIN_PASSWORD="1234";
+
+const productsDiv=document.getElementById("products");
+const cartDiv=document.getElementById("cart");
+const cartBtn=document.getElementById("cartBtn");
+const cartItems=document.getElementById("cartItems");
+const cartCount=document.getElementById("cart-count");
+const loginBtn=document.getElementById("login-btn");
+const adminBtn=document.getElementById("admin-btn");
+
+// Mostrar botón admin solo a ti
+window.onload = ()=>{
+  const pass = prompt("Ingresa contraseña de admin (solo para ti):");
+  if(pass === ADMIN_PASSWORD){
+    adminBtn.style.display = "inline-block";
+  }
+}
+
+// Dibujar productos
+function drawProducts(){
+  productsDiv.innerHTML="";
+  products.forEach((p,i)=>{
+    const d=document.createElement("div");
+    d.className="product";
+    d.innerHTML=`<img src="${p.img}" alt="${p.name}"><h3>${p.name}</h3><p>${p.price}€</p><button>Añadir</button>`;
+    d.querySelector("button").onclick=()=>{cart.push(p); drawCart();};
+    productsDiv.appendChild(d);
+  });
+}
+drawProducts();
+
+// Carrito
+function drawCart(){
+  cartItems.innerHTML="";
+  cart.forEach((p,i)=>{cartItems.innerHTML+=`${p.name} ${p.price}€ <button onclick='removeItem(${i})'>X</button><br>`});
+  cartCount.textContent = cart.length;
+  const user = JSON.parse(localStorage.getItem("user"));
+  if(user && user.address){
+    cartItems.innerHTML += `<hr><strong>Dirección de envío:</strong><br>${user.address}`;
+  }
+  renderPaymentMethods();
+}
+function removeItem(i){cart.splice(i,1); drawCart();}
+cartBtn.onclick=()=>{cartDiv.classList.toggle("open")};
+
+// Login / Registro
+const loginModal=document.getElementById("login-modal");
+const closeLogin=document.getElementById("close-login");
+const loginSubmit=document.getElementById("login-submit");
+loginBtn.onclick=()=>{loginModal.style.display="block"};
+closeLogin.onclick=()=>{loginModal.style.display="none"};
+window.onclick=(e)=>{if(e.target==loginModal){loginModal.style.display="none"}};
+loginSubmit.onclick=()=>{
+  const name=document.getElementById("reg-name").value;
+  const email=document.getElementById("login-email").value;
+  const pass=document.getElementById("login-pass").value;
+  const address=document.getElementById("reg-address").value;
+  if(!email || !pass){alert("Completa correo y contraseña"); return;}
+  localStorage.setItem("user", JSON.stringify({name,email,pass,address}));
+  alert(`Registrado:\nNombre: ${name}\nCorreo: ${email}\nDirección: ${address}`);
+  loginModal.style.display="none";
+  drawCart();
+}
+
+// Admin login y panel
+const adminModal=document.getElementById("admin-modal");
+const closeAdmin=document.getElementById("close-admin");
+const adminLoginSubmit=document.getElementById("admin-login-submit");
+const adminPanel=document.getElementById("admin-panel");
+const closeAdminPanel=document.getElementById("close-admin-panel");
+const adminLogo=document.getElementById("admin-logo");
+const adminColor=document.getElementById("admin-color");
+const adminInstagram=document.getElementById("admin-instagram");
+const adminProductsDiv=document.getElementById("admin-products");
+const adminAddProduct=document.getElementById("admin-add-product");
+const adminAddPaymentBtn=document.getElementById("admin-add-payment");
+const addPaymentInput=document.getElementById("add-payment");
+const adminSave=document.getElementById("admin-save");
+
+adminBtn.onclick=()=>{adminModal.style.display="block"};
+closeAdmin.onclick=()=>{adminModal.style.display="none"};
+adminLoginSubmit.onclick=()=>{
+  const pass=document.getElementById("admin-pass").value;
+  if(pass===ADMIN_PASSWORD){ adminModal.style.display="none"; openAdminPanel(); }
+  else{ alert("Contraseña incorrecta"); }
+}
+closeAdminPanel.onclick=()=>{adminPanel.style.display="none"};
+
+function openAdminPanel(){
+  adminPanel.style.display="block";
+  adminLogo.value=document.getElementById("logo").src;
+  adminColor.value="#ffffff";
+  adminInstagram.value=localStorage.getItem("instagram")||"";
+  renderAdminProducts();
+}
+
+function renderAdminProducts(){
+  adminProductsDiv.innerHTML="";
+  products.forEach((p,i)=>{
+    const d=document.createElement("div");
+    d.className="admin-product";
+    d.innerHTML=`<img src="${p.img}" alt="${p.name}"><input type='text' value='${p.name}'><input type='number' value='${p.price}'><input type='file' id='upload-${i}'><button onclick='removeAdminProduct(${i})'>Eliminar</button>`;
+    adminProductsDiv.appendChild(d);
+    document.getElementById(`upload-${i}`).addEventListener("change", e=>{
+      const reader = new FileReader();
+      reader.onload=ev=>{p.img=ev.target.result; renderAdminProducts(); drawProducts();};
+      reader.readAsDataURL(e.target.files[0]);
+    });
+  });
+}
+window.removeAdminProduct=i=>{products.splice(i,1); renderAdminProducts();}
+adminAddProduct.onclick=()=>{products.push({name:"Nuevo producto",price:0,img:"img/logo.png"}); renderAdminProducts();}
+
+// Métodos de pago
+function renderPaymentMethods(){
+  const pmDiv=document.getElementById("payment-methods");
+  pmDiv.innerHTML="";
+  paymentMethods.forEach(p=>{
+    const img=document.createElement("img");
+    img.src=p; img.style.width="50px"; img.style.marginRight="5px"; pmDiv.appendChild(img);
+  });
+}
+adminAddPaymentBtn.onclick=()=>{
+  const files=addPaymentInput.files;
+  for(let i=0;i<files.length;i++){
+    const reader=new FileReader();
+    reader.onload=e=>{paymentMethods.push(e.target.result); renderPaymentMethods();};
+    reader.readAsDataURL(files[i]);
+  }
+}
+
+adminSave.onclick=()=>{
+  document.getElementById("logo").src=adminLogo.value;
+  document.querySelector("header").style.backgroundColor=adminColor.value;
+  localStorage.setItem("instagram",adminInstagram.value);
+  const inputs=adminProductsDiv.querySelectorAll("input[type=text],input[type=number]");
+  for(let i=0;i<products.length;i++){products[i].name=inputs[i*2].value; products[i].price=parseFloat(inputs[i*2+1].value);}
+  drawProducts(); alert("Cambios guardados!"); adminPanel.style.display="none";
+}
+
+// Inicio y Categorías
+document.getElementById("inicio-btn").onclick=()=>{drawProducts();}
+document.getElementById("categorias-btn").onclick=()=>{alert("Aquí se podrían filtrar categorías");}
+</script></body>
+</html>
