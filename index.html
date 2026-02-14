@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koolo Premium</title>
+
+<style>
+
+/* ===== BASE ===== */
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#fff;
+color:#000;
+}
+
+/* ===== HEADER ===== */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+border-bottom:1px solid #000;
+}
+
+.header-left{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+#logo{
+height:50px;
+}
+
+.header-left a{
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+.header-right button{
+background:black;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:4px;
+cursor:pointer;
+}
+
+/* ===== PRODUCTOS ===== */
+#products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+padding:20px;
+}
+
+.product{
+border:1px solid black;
+padding:10px;
+width:180px;
+text-align:center;
+}
+
+.product img{
+width:120px;
+height:120px;
+}
+
+.product button{
+background:black;
+color:white;
+border:none;
+padding:5px 10px;
+margin-top:5px;
+}
+
+/* ===== CARRITO ===== */
+#cart{
+display:none;
+position:fixed;
+top:70px;
+right:10px;
+background:white;
+border:1px solid black;
+padding:10px;
+width:260px;
+max-height:400px;
+overflow:auto;
+z-index:100;
+}
+
+#cart.open{display:block;}
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+z-index:200;
+}
+
+.modal-content{
+background:white;
+width:340px;
+margin:10% auto;
+padding:15px;
+}
+
+.modal-content input{
+width:100%;
+margin:5px 0;
+padding:6px;
+}
+
+.admin-product{
+border:1px solid #ccc;
+padding:5px;
+margin:5px 0;
+}
+
+.admin-product img{width:40px}
+
+/* ===== MOBILE FIX ===== */
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:10px;
+}
+
+.header-left{
+flex-direction:column;
+}
+
+.header-right{
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header-left">
+<img src="img/logo.png" id="logo" alt="Koolo logo">
+<a href="#" id="inicio">Inicio</a>
+<a href="#" id="categorias">Categorías</a>
+</div>
+
+<div class="header-right">
+<button id="loginBtn">Login</button>
+<button id="cartBtn">🛒 <span id="count">0</span></button>
+<button id="adminBtn" style="display:none">Admin</button>
+</div>
+
+</header>
+
+<main id="products"></main>
+
+<div id="cart">
+<h3>Carrito</h3>
+<div id="cartItems"></div>
+<hr>
+<div id="payments"></div>
+</div>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<h3>Registro / Login</h3>
+<input id="name" placeholder="Nombre">
+<input id="email" placeholder="Correo">
+<input id="pass" type="password" placeholder="Contraseña">
+<input id="address" placeholder="Dirección envío">
+<button id="loginSubmit">Entrar</button>
+</div>
+</div>
+
+<!-- ADMIN -->
+<div class="modal" id="adminModal">
+<div class="modal-content">
+<input id="adminPass" type="password" placeholder="Password admin">
+<button id="adminEnter">Entrar</button>
+</div>
+</div>
+
+<div class="modal" id="adminPanel">
+<div class="modal-content">
+<h3>Mini Admin</h3>
+
+<input id="logoInput" placeholder="img/logo.png">
+<input type="color" id="color">
+
+<h4>Productos</h4>
+<div id="adminProducts"></div>
+<button id="addProduct">Añadir producto</button>
+
+<h4>Métodos de pago</h4>
+<input type="file" id="payUpload" multiple>
+<button id="saveAdmin">Guardar</button>
+
+</div>
+</div>
+
+<script>
+
+const ADMIN="1234";
+
+let products=[
+{name:"Camiseta",price:20,img:"img/camiseta.png"},
+{name:"Sudadera",price:35,img:"img/sudadera.png"},
+{name:"Gorra",price:15,img:"img/gorra.png"}
+];
+
+let cart=[];
+let payments=[];
+
+const prodDiv=document.getElementById("products");
+const cartDiv=document.getElementById("cart");
+
+function draw(){
+prodDiv.innerHTML="";
+products.forEach((p,i)=>{
+let d=document.createElement("div");
+d.className="product";
+d.innerHTML=`<img src="${p.img}"><h4>${p.name}</h4>${p.price}€<br><button>Añadir</button>`;
+d.querySelector("button").onclick=()=>{cart.push(p);updateCart();}
+prodDiv.appendChild(d);
+});
+}
+draw();
+
+function updateCart(){
+document.getElementById("cartItems").innerHTML="";
+cart.forEach(c=>{
+cartItems.innerHTML+=`${c.name} ${c.price}€<br>`;
+});
+count.textContent=cart.length;
+
+let user=JSON.parse(localStorage.getItem("user"));
+if(user) cartItems.innerHTML+=`<hr>${user.address}`;
+
+paymentsDiv.innerHTML="";
+payments.forEach(p=>{
+let i=document.createElement("img");
+i.src=p;i.style.width="40px";
+paymentsDiv.appendChild(i);
+});
+}
+
+cartBtn.onclick=()=>cartDiv.classList.toggle("open");
+
+/* LOGIN */
+loginBtn.onclick=()=>loginModal.style.display="block";
+loginSubmit.onclick=()=>{
+localStorage.setItem("user",JSON.stringify({
+name:name.value,email:email.value,address:address.value
+}));
+loginModal.style.display="none";
+updateCart();
+}
+
+/* ADMIN */
+window.onload=()=>{
+let p=prompt("Admin password:");
+if(p===ADMIN) adminBtn.style.display="inline-block";
+}
+
+adminBtn.onclick=()=>adminModal.style.display="block";
+adminEnter.onclick=()=>{
+if(adminPass.value===ADMIN){
+adminModal.style.display="none";
+adminPanel.style.display="block";
+renderAdmin();
+}
+}
+
+function renderAdmin(){
+adminProducts.innerHTML="";
+products.forEach((p,i)=>{
+let d=document.createElement("div");
+d.className="admin-product";
+d.innerHTML=`<img src="${p.img}">
+<input value="${p.name}">
+<input type="number" value="${p.price}">
+<input type="file">
+`;
+adminProducts.appendChild(d);
+});
+}
+
+addProduct.onclick=()=>{
+products.push({name:"Nuevo",price:0,img:"img/logo.png"});
+renderAdmin();
+}
+
+payUpload.onchange=e=>{
+[...e.target.files].forEach(f=>{
+let r=new FileReader();
+r.onload=x=>{payments.push(x.target.result);updateCart();}
+r.readAsDataURL(f);
+});
+}
+
+saveAdmin.onclick=()=>{
+document.getElementById("logo").src=logoInput.value;
+document.querySelector("header").style.background=color.value;
+draw();
+adminPanel.style.display="none";
+}
+
+/* NAV */
+inicio.onclick=()=>draw();
+categorias.onclick=()=>alert("Categorías próximamente");
+
+</script>
+
+</body>
+</html>
