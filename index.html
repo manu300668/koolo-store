@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Koolo – Tienda online premium de ropa urbana</title>
+
+<meta name="description" content="Koolo es una tienda premium de ropa urbana. Compra camisetas, sudaderas y accesorios con envío rápido en España.">
+<meta name="keywords" content="ropa urbana, camisetas, sudaderas, tienda online, moda streetwear, Koolo">
+<meta property="og:title" content="Koolo – Moda urbana premium">
+<meta property="og:description" content="Compra ropa urbana premium online en Koolo.">
+<meta property="og:image" content="https://koolo.es/img/logo.png">
+<meta property="og:url" content="https://koolo.es">
+<meta name="robots" content="index, follow">
+
+<style>
+
+body{margin:0;font-family:Arial;background:white;color:black}
+
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px;
+background:black;
+color:white;
+}
+
+.header-left,.header-right{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+#logo{height:45px}
+
+header a{color:white;text-decoration:none;font-weight:bold}
+
+button{cursor:pointer}
+
+/* PRODUCTS */
+
+#products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:20px;
+}
+
+.product{
+border:1px solid black;
+padding:10px;
+width:180px;
+text-align:center;
+transition:.2s;
+}
+
+.product:hover{transform:scale(1.05)}
+
+.product img{width:120px;height:120px}
+
+.product button{
+background:black;
+color:white;
+border:none;
+padding:6px;
+margin-top:6px;
+}
+
+/* CART */
+
+#cart{
+position:fixed;
+top:80px;
+right:-320px;
+width:280px;
+background:white;
+padding:15px;
+border-radius:10px;
+border:1px solid #ccc;
+box-shadow:0 8px 20px rgba(0,0,0,.3);
+transition:.4s;
+opacity:0;
+z-index:100;
+}
+
+#cart.open{right:10px;opacity:1}
+
+#checkoutBtn{
+width:100%;
+background:black;
+color:white;
+border:none;
+padding:8px;
+border-radius:6px;
+margin-top:10px;
+}
+
+#checkoutBtn.show{transform:scale(1.1)}
+
+.cart-item{opacity:0;transform:translateX(40px);transition:.4s}
+
+/* MODALS */
+
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.6);
+z-index:200;
+}
+
+.modal-content{
+background:white;
+width:300px;
+margin:10% auto;
+padding:15px;
+}
+
+.modal-content input{width:100%;margin:5px 0;padding:6px}
+
+/* TOAST */
+
+#toast{
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+background:black;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+opacity:0;
+transition:.4s;
+z-index:300;
+}
+
+#toast.show{opacity:1;transform:translateX(-50%) translateY(-10px)}
+
+</style>
+</head>
+
+<body>
+
+<h1 style="display:none">Koolo – tienda online premium de ropa urbana</h1>
+
+<header>
+
+<div class="header-left">
+<img src="img/logo.png" id="logo">
+<a href="#">Inicio</a>
+<a href="#">Categorías</a>
+</div>
+
+<div class="header-right">
+<button id="loginBtn">Login</button>
+<button id="cartBtn">🛒 <span id="count">0</span></button>
+<button id="adminBtn" style="display:none">Admin</button>
+</div>
+
+</header>
+
+<main id="products"></main>
+
+<div id="cart">
+<h3>Carrito</h3>
+<div id="cartItems"></div>
+<hr>
+<button id="checkoutBtn">Finalizar compra</button>
+<div id="paypal-button-container"></div>
+</div>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<input id="name" placeholder="Nombre">
+<input id="email" placeholder="Email">
+<input id="address" placeholder="Dirección envío">
+<button id="loginSubmit">Guardar</button>
+</div>
+</div>
+
+<!-- ADMIN -->
+<div class="modal" id="adminModal">
+<div class="modal-content">
+<input id="adminPass" placeholder="Admin password">
+<button id="adminEnter">Entrar</button>
+</div>
+</div>
+
+<div class="modal" id="adminPanel">
+<div class="modal-content">
+<h3>Mini Admin</h3>
+<input id="logoInput" placeholder="img/logo.png">
+<input type="color" id="color">
+<button id="saveAdmin">Guardar</button>
+</div>
+</div>
+
+<div id="toast">Producto añadido</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=EUR"></script>
+
+<script>
+
+const ADMIN="1234";
+
+let products=[
+{name:"Camiseta",price:20,img:"img/camiseta.png"},
+{name:"Sudadera",price:35,img:"img/sudadera.png"},
+{name:"Gorra",price:15,img:"img/gorra.png"}
+];
+
+let cart=[];
+
+const prodDiv=document.getElementById("products");
+const cartDiv=document.getElementById("cart");
+
+function draw(){
+prodDiv.innerHTML="";
+products.forEach(p=>{
+let d=document.createElement("div");
+d.className="product";
+d.innerHTML=`<img src="${p.img}"><h4>${p.name}</h4>${p.price}€<br><button>Añadir</button>`;
+d.querySelector("button").onclick=()=>{
+cart.push(p);
+updateCart();
+toast(p.name+" añadido");
+};
+prodDiv.appendChild(d);
+});
+}
+draw();
+
+function updateCart(){
+cartItems.innerHTML="";
+cart.forEach((c,i)=>{
+let d=document.createElement("div");
+d.className="cart-item";
+d.textContent=`${c.name} ${c.price}€`;
+cartItems.appendChild(d);
+setTimeout(()=>{d.style.opacity=1;d.style.transform="translateX(0)"},i*80);
+});
+count.textContent=cart.length;
+renderPayPal();
+}
+
+cartBtn.onclick=()=>cartDiv.classList.toggle("open");
+
+loginBtn.onclick=()=>loginModal.style.display="block";
+loginSubmit.onclick=()=>loginModal.style.display="none";
+
+window.onload=()=>{
+if(prompt("Admin password")==ADMIN) adminBtn.style.display="inline-block";
+}
+
+adminBtn.onclick=()=>adminModal.style.display="block";
+
+adminEnter.onclick=()=>{
+if(adminPass.value===ADMIN){
+adminModal.style.display="none";
+adminPanel.style.display="block";
+}
+}
+
+saveAdmin.onclick=()=>{
+logo.src=logoInput.value;
+document.querySelector("header").style.background=color.value;
+adminPanel.style.display="none";
+}
+
+/* Toast */
+
+function toast(t){
+let el=document.getElementById("toast");
+el.textContent=t;
+el.classList.add("show");
+setTimeout(()=>el.classList.remove("show"),1500);
+}
+
+/* PAYPAL */
+
+function total(){return cart.reduce((s,p)=>s+p.price,0)}
+
+function renderPayPal(){
+paypal.Buttons({
+createOrder:(d,a)=>a.order.create({
+purchase_units:[{amount:{value:total().toFixed(2)}}]
+}),
+onApprove:(d,a)=>a.order.capture().then(()=>{
+alert("Pago completado");
+cart=[];updateCart();
+})
+}).render('#paypal-button-container');
+}
+
+checkoutBtn.onclick=()=>{
+if(cart.length===0)return alert("Carrito vacío");
+paypalButtonContainer.scrollIntoView({behavior:"smooth"});
+}
+
+</script>
+
+</body>
+</html>
