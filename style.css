@@ -1,0 +1,188 @@
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: white;
+    color: black;
+}
+
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: black;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo */
+.logo {
+    height: 50px;
+}
+
+/* Botones del header */
+header button, .btn-nav {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header button:hover, .btn-nav:hover {
+    text-decoration: underline;
+}
+
+/* ===== MAIN / PRODUCTOS ===== */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    border: 1px solid black;
+    padding: 10px;
+    width: 180px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.add-btn {
+    margin-top: 10px;
+    padding: 6px;
+    background: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #333;
+}
+
+/* ===== CARRITO ===== */
+#cartModal {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    width: 280px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    padding: 15px;
+    z-index: 100;
+}
+
+#cartItems {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#checkoutBtn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+/* ===== MODALES ===== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 200;
+}
+
+.modal-content {
+    background: white;
+    width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 6px;
+    margin: 5px 0;
+}
+
+/* ===== TOAST ===== */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    z-index: 300;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-left, .header-right {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    #cartModal {
+        width: 90%;
+        right: 5%;
+        top: 60px;
+    }
+
+    .product {
+        width: 45%;
+    }
+}
