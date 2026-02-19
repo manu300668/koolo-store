@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="header-left">
+<button id="hamburger">☰</button>
+</div>
+
+<div class="logo">
+<img src="img/logo.png" alt="Koolo Logo">
+</div>
+
+<nav class="desktop-nav">
+<button id="btn-inicio">Inicio</button>
+<button id="btn-categorias">Categorías</button>
+<button id="btn-login">Login</button>
+<button id="admin-btn" style="display:none;">Admin</button>
+</nav>
+
+<div class="cart">
+🛒 <span id="cart-count">0</span>
+</div>
+
+</header>
+
+<!-- ================= MENÚ LATERAL ================= -->
+
+<div id="side-menu" class="side-menu">
+<button id="close-btn">✖</button>
+<ul>
+<li><a href="#" id="btn-inicio">Inicio</a></li>
+<li><a href="#" id="btn-categorias">Categorías</a></li>
+<li><a href="#" id="btn-login">Login</a></li>
+</ul>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<!-- ================= PRODUCTOS ================= -->
+
+<main>
+
+<section class="products">
+
+<div class="product">
+<img src="img/producto1.jpg" alt="Producto 1">
+<h3>Producto 1</h3>
+<p>25</p>
+<button class="add-to-cart">Añadir al carrito</button>
+</div>
+
+<div class="product">
+<img src="img/producto2.jpg" alt="Producto 2">
+<h3>Producto 2</h3>
+<p>40</p>
+<button class="add-to-cart">Añadir al carrito</button>
+</div>
+
+</section>
+
+</main>
+
+<!-- ================= CARRITO DESPLEGABLE ================= -->
+
+<div id="cart-dropdown" class="cart-dropdown">
+<ul id="cart-items"></ul>
+<p id="cart-total">Total: 0€</p>
+</div>
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div id="login-modal" class="modal">
+
+<div class="modal-content">
+
+<button id="close-modal">✖</button>
+
+<h2>Login</h2>
+<form id="login-form">
+<input type="email" id="loginEmail" placeholder="Email" required>
+<input type="password" id="loginPassword" placeholder="Contraseña" required>
+<button type="submit">Entrar</button>
+</form>
+
+<hr>
+
+<h2>Registro</h2>
+<form id="register-form">
+<input type="text" id="regUsername" placeholder="Nombre" required>
+<input type="email" id="regEmail" placeholder="Email" required>
+<input type="password" id="regPassword" placeholder="Contraseña" required>
+<input type="text" id="regAddress" placeholder="Dirección de envío" required>
+<button type="submit">Registrarse</button>
+</form>
+
+</div>
+</div>
+
+<!-- ================= PANEL ADMIN ================= -->
+
+<div id="admin-panel" class="admin-panel" style="display:none;">
+
+<h2>Panel Admin</h2>
+<button id="close-admin">Cerrar</button>
+
+<h3>Añadir Red Social</h3>
+<input type="text" id="social-name" placeholder="Nombre (Instagram, Facebook...)">
+<input type="text" id="social-url" placeholder="URL">
+<button id="add-social-btn">Añadir</button>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer id="footer">
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
