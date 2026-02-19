@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="img/logo.png" alt="Koolo logo">
+    </div>
+
+    <nav class="nav-desktop">
+      <a href="#" id="btn-inicio">Inicio</a>
+      <a href="#" id="btn-categorias">Categorías</a>
+      <a href="#" id="btn-login">Login</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger">&#9776;</div>
+
+    <div class="cart">
+      <span id="cart-count">0</span>
+      🛒
+      <div class="cart-dropdown" id="cart-dropdown">
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: 0€</p>
+        <button id="clear-cart-btn">Vaciar carrito</button>
+      </div>
+    </div>
+
+    <button id="admin-btn" style="display:none;">Admin</button>
+  </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- Side menu mobile -->
+<nav class="side-menu" id="side-menu">
+  <div class="close-btn" id="close-btn">&times;</div>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Categorías</a></li>
+    <li><a href="#" id="side-login">Login</a></li>
+  </ul>
+</nav>
+
+<!-- Modal Login/Registro -->
+<div class="modal" id="login-modal">
+  <div class="modal-content">
+    <span class="close-modal" id="close-modal">&times;</span>
+    <h2>Registro</h2>
+    <form id="register-form">
+      <input type="text" id="reg-username" placeholder="Nombre de usuario" required>
+      <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+      <input type="password" id="reg-password" placeholder="Contraseña" required>
+      <input type="text" id="reg-address" placeholder="Dirección de envío" required>
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <h2>Login</h2>
+    <form id="login-form">
+      <input type="email" id="login-email" placeholder="Correo electrónico" required>
+      <input type="password" id="login-password" placeholder="Contraseña" required>
+      <button type="submit">Iniciar sesión</button>
+    </form>
+  </div>
+</div>
+
+<main>
+  <div class="product">
+    <img src="img/camiseta.png" alt="Camiseta">
+    <h3>Camiseta</h3>
+    <p>20</p>
+    <button class="add-to-cart">Añadir</button>
+  </div>
+  <div class="product">
+    <img src="img/sudadera.png" alt="Sudadera">
+    <h3>Sudadera</h3>
+    <p>35</p>
+    <button class="add-to-cart">Añadir</button>
+  </div>
+</main>
+
+<!-- Admin Panel -->
+<div class="admin-panel" id="admin-panel">
+  <div class="admin-content">
+    <span class="close-admin" id="close-admin">&times;</span>
+    <h2>Panel Admin</h2>
+
+    <div class="admin-section">
+      <h3>Redes Sociales</h3>
+      <input type="text" id="social-name" placeholder="Nombre de la red (ej: Instagram)">
+      <input type="url" id="social-url" placeholder="URL completa">
+      <button id="add-social-btn">Agregar red social</button>
+      <ul id="social-list"></ul>
+    </div>
+
+    <div class="admin-section">
+      <h3>Productos</h3>
+      <input type="text" id="prod-name" placeholder="Nombre producto">
+      <input type="number" id="prod-price" placeholder="Precio €">
+      <input type="text" id="prod-img" placeholder="Nombre archivo de imagen">
+      <button id="add-prod-btn">Agregar producto</button>
+      <button id="clear-all-products">Vaciar todos los productos</button>
+    </div>
+
+    <div class="admin-section">
+      <h3>Carrito</h3>
+      <button id="clear-cart-admin">Vaciar carrito de todos los usuarios</button>
+    </div>
+  </div>
+</div>
+
+<footer id="footer"></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
