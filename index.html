@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="img/logo.png" alt="Koolo logo">
+    </div>
+
+    <!-- Botones de navegación escritorio -->
+    <nav class="nav-desktop">
+      <a href="#">Inicio</a>
+      <a href="#">Categorías</a>
+    </nav>
+
+    <!-- Botón hamburguesa móvil -->
+    <div class="hamburger" id="hamburger">&#9776;</div>
+
+    <!-- Carrito con contador -->
+    <div class="cart">
+      <span id="cart-count">0</span>
+      🛒
+    </div>
+  </div>
+</header>
+
+<!-- Overlay oscuro -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Menú lateral -->
+<nav class="side-menu" id="side-menu">
+  <div class="close-btn" id="close-btn">&times;</div>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Categorías</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="product">
+    <img src="img/camiseta.png" alt="Camiseta">
+    <h3>Camiseta</h3>
+    <p>20€</p>
+    <button class="add-to-cart">Añadir</button>
+  </div>
+  <div class="product">
+    <img src="img/sudadera.png" alt="Sudadera">
+    <h3>Sudadera</h3>
+    <p>35€</p>
+    <button class="add-to-cart">Añadir</button>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
