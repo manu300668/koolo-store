@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header">
+
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="logo">
+        <img src="img/logo.png" alt="Koolo">
+    </div>
+
+    <div class="cart" onclick="openCart()">
+        🛒
+        <span id="cart-count">0</span>
+    </div>
+
+</header>
+
+<nav id="mobileMenu" class="mobile-menu">
+    <a href="#" onclick="showSection('inicio')">Inicio</a>
+    <a href="#" onclick="showSection('categorias')">Categorías</a>
+    <a href="#" onclick="openLogin()">Login</a>
+</nav>
+
+<main id="contenido">
+
+<section id="inicio" class="section active">
+
+<div class="productos">
+
+<div class="producto">
+    <img src="img/producto1.png" alt="Producto 1">
+    <h2>Producto 1</h2>
+    <p>25 €</p>
+    <button onclick="addToCart()">Añadir al carrito</button>
+</div>
+
+<div class="producto">
+    <img src="img/producto2.png" alt="Producto 2">
+    <h2>Producto 2</h2>
+    <p>40 €</p>
+    <button onclick="addToCart()">Añadir al carrito</button>
+</div>
+
+</div>
+
+</section>
+
+<section id="categorias" class="section">
+<h2>Categorías</h2>
+<p>Próximamente...</p>
+</section>
+
+</main>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLogin()">&times;</span>
+        <h2>Iniciar sesión</h2>
+        <input type="text" placeholder="Usuario">
+        <input type="password" placeholder="Contraseña">
+        <button>Entrar</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
