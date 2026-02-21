@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Koolo Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="Koolo Logo">
+  </div>
+
+  <nav class="menu">
+    <a href="#" onclick="mostrarTodos()">Inicio</a>
+    <a href="#" onclick="filtrarCategoria('ropa')">Ropa</a>
+    <a href="#" onclick="filtrarCategoria('accesorios')">Accesorios</a>
+    <a href="#" onclick="abrirLogin()">Login</a>
+  </nav>
+
+  <div class="cart-icon" onclick="toggleCarrito()">
+    🛒 <span id="cart-count">0</span>
+  </div>
+</header>
+
+<!-- CARRITO DESPLEGABLE -->
+<div id="carrito" class="carrito">
+  <h3>Carrito</h3>
+  <ul id="lista-carrito"></ul>
+  <p>Total: <span id="total">0</span> €</p>
+  <button onclick="vaciarCarrito()">Vaciar</button>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarLogin()">×</span>
+    <h2>Login</h2>
+    <input type="text" placeholder="Usuario">
+    <input type="password" placeholder="Contraseña">
+    <button>Entrar</button>
+  </div>
+</div>
+
+<main class="productos">
+
+  <div class="producto" data-categoria="ropa">
+    <img src="img/camiseta.png">
+    <h2>Camiseta</h2>
+    <p>25 €</p>
+    <button onclick="agregarAlCarrito('Camiseta',25)">Añadir</button>
+  </div>
+
+  <div class="producto" data-categoria="accesorios">
+    <img src="img/gorra.png">
+    <h2>Gorra</h2>
+    <p>20 €</p>
+    <button onclick="agregarAlCarrito('Gorra',20)">Añadir</button>
+  </div>
+
+  <div class="producto" data-categoria="ropa">
+    <img src="img/sudadera.png">
+    <h2>Sudadera</h2>
+    <p>40 €</p>
+    <button onclick="agregarAlCarrito('Sudadera',40)">Añadir</button>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
