@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Koolo Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="Koolo Logo">
+  </div>
+
+  <nav class="menu">
+    <a href="#">Inicio</a>
+    <a href="#">Categorías</a>
+    <a href="#">Login</a>
+  </nav>
+
+  <div class="cart-icon">
+    🛒 <span id="cart-count">0</span>
+  </div>
+
+</header>
+
+
+<main class="productos">
+
+  <div class="producto">
+    <img src="img/camiseta.png" alt="Camiseta">
+    <h2>Camiseta</h2>
+    <p>25 €</p>
+    <button onclick="agregarAlCarrito(25)">Añadir al carrito</button>
+  </div>
+
+  <div class="producto">
+    <img src="img/gorra.png" alt="Gorra">
+    <h2>Gorra</h2>
+    <p>20 €</p>
+    <button onclick="agregarAlCarrito(20)">Añadir al carrito</button>
+  </div>
+
+  <div class="producto">
+    <img src="img/sudadera.png" alt="Sudadera">
+    <h2>Sudadera</h2>
+    <p>40 €</p>
+    <button onclick="agregarAlCarrito(40)">Añadir al carrito</button>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
