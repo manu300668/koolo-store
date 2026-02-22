@@ -1,0 +1,47 @@
+body{margin:0;font-family:Segoe UI, Arial, sans-serif;background:linear-gradient(to bottom,#f8f8f8,#eeeeee);}
+.header{display:flex;justify-content:space-between;align-items:center;background:black;padding:15px 30px;color:white;box-shadow:0 2px 10px rgba(0,0,0,0.15);}
+.logo img{height:45px;}
+.menu{display:flex;gap:30px;align-items:center;}
+.menu a,.dropdown span{color:white;text-decoration:none;font-weight:bold;cursor:pointer;}
+.menu a:hover{color:red;}
+.dropdown{position:relative;}
+.dropdown-content{display:none;position:absolute;top:30px;background:white;min-width:150px;box-shadow:0 5px 15px rgba(0,0,0,0.2);border-radius:5px;}
+.dropdown-content a{display:block;padding:10px;color:black;text-decoration:none;}
+.dropdown-content a:hover{background:#f0f0f0;}
+.dropdown:hover .dropdown-content{display:block;}
+.cart-icon{position:relative;cursor:pointer;font-size:22px;}
+#cart-count{position:absolute;top:-8px;right:-10px;background:red;color:white;font-size:12px;padding:3px 7px;border-radius:50%;}
+.hero{height:80vh;background:url('img/hero.jpg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;color:white;position:relative;overflow:hidden;}
+.hero::after{content:"";position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.45);top:0;left:0;}
+.hero-content{position:relative;z-index:2;max-width:90%;padding:0 20px;}
+.hero h1{font-size:4vw;font-weight:700;letter-spacing:2px;margin-bottom:15px;}
+.hero p{font-size:1.5vw;margin-bottom:20px;}
+.hero button{padding:12px 25px;border:none;background:red;color:white;cursor:pointer;border-radius:5px;font-size:1vw;transition:0.3s;}
+.hero button:hover{background:black;}
+.productos{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;padding:50px 20px;}
+.producto{background:white;padding:20px;width:250px;text-align:center;border-radius:8px;transition:0.3s;position:relative;}
+.producto:hover{box-shadow:0 8px 20px rgba(0,0,0,0.15);}
+.producto img{width:100%;height:200px;object-fit:contain;transition:0.4s;}
+.producto:hover img{transform:scale(1.08);}
+.producto button{background:black;color:white;border:none;padding:10px;margin-top:10px;cursor:pointer;border-radius:5px;}
+.producto button:hover{background:red;}
+.producto .badge{position:absolute;top:5px;right:5px;background:red;color:white;border-radius:50%;padding:3px 7px;font-size:12px;}
+.admin-panel{background:#f7f7f7;padding:20px;border-radius:8px;margin:40px auto;max-width:500px;box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+.admin-panel h4{margin-top:20px;}
+.admin-panel input{width:100%;padding:8px;margin:5px 0;border-radius:5px;border:1px solid #ccc;}
+.admin-panel button{background:red;color:white;border:none;padding:10px;width:100%;margin:5px 0 10px 0;cursor:pointer;border-radius:5px;}
+.admin-panel button:hover{background:black;}
+.admin-panel ul{list-style:none;padding:0;margin:0 0 10px 0;max-height:150px;overflow-y:auto;border:1px solid #ccc;border-radius:5px;}
+.admin-panel ul li{padding:8px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;}
+.admin-panel ul li button{background:#333;padding:3px 8px;border-radius:5px;font-size:12px;}
+.admin-panel ul li button:hover{background:red;}
+.carrito{position:fixed;right:20px;top:80px;background:white;padding:20px;width:260px;border-radius:8px;box-shadow:0 5px 20px rgba(0,0,0,0.2);display:none;z-index:1000;}
+.paypal-disabled{background:#ccc;padding:12px;text-align:center;border-radius:6px;margin-top:15px;font-weight:bold;}
+.modal{display:none;position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;}
+.modal-content{background:white;padding:30px;width:300px;border-radius:8px;display:flex;flex-direction:column;}
+.modal-content input{margin:10px 0;padding:10px;}
+.cerrar{text-align:right;cursor:pointer;font-size:20px;}
+@keyframes shake{0%{transform:rotate(0);}25%{transform:rotate(-10deg);}50%{transform:rotate(10deg);}75%{transform:rotate(-10deg);}100%{transform:rotate(0);}}
+.shake{animation:shake 0.4s;}
+@media(max-width:1024px){.hero h1{font-size:6vw;}.hero p{font-size:3vw;}.hero button{font-size:2vw;padding:10px 20px;}}
+@media(max-width:768px){.hero{height:60vh;}.hero h1{font-size:8vw;}.hero p{font-size:4vw;}.hero button{font-size:3vw;padding:8px 18px;}}
