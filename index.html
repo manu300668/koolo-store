@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Koolo Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="Koolo Logo">
+  </div>
+
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+  <nav class="menu">
+    <a href="#" onclick="mostrarTodos()">Inicio</a>
+
+    <div class="dropdown">
+      <span>Categorías ▾</span>
+      <div class="dropdown-content">
+        <a href="#" onclick="filtrarCategoria('ropa')">Ropa</a>
+        <a href="#" onclick="filtrarCategoria('accesorios')">Accesorios</a>
+      </div>
+    </div>
+
+    <a href="#" onclick="abrirLogin()">Login</a>
+    <a href="#" onclick="abrirAdmin()">Admin</a>
+  </nav>
+
+  <div class="cart-icon" onclick="toggleCarrito()">🛒 <span id="cart-count">0</span></div>
+
+</header>
+
+<!-- CARRITO -->
+<div id="carrito" class="carrito">
+  <h3>Carrito</h3>
+  <ul id="lista-carrito"></ul>
+  <p>Total: <span id="total">0</span> €</p>
+  <button onclick="vaciarCarrito()">Vaciar</button>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarLogin()">×</span>
+    <h2>Login</h2>
+    <input type="text" placeholder="Usuario">
+    <input type="password" placeholder="Contraseña">
+    <button>Entrar</button>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div id="adminModal" class="modal">
+  <div class="modal-content">
+    <span class="cerrar" onclick="cerrarAdmin()">×</span>
+    <h2>Panel Admin</h2>
+    <input type="password" id="adminPass" placeholder="Contraseña Admin">
+    <button onclick="entrarAdmin()">Entrar</button>
+    <div id="adminTools" style="display:none; margin-top:20px;">
+      <h3>Agregar Producto</h3>
+      <input type="text" id="prodNombre" placeholder="Nombre">
+      <input type="number" id="prodPrecio" placeholder="Precio">
+      <input type="text" id="prodCategoria" placeholder="Categoría">
+      <input type="text" id="prodImg" placeholder="Nombre imagen (ej: img/camiseta.png)">
+      <button onclick="agregarProducto()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<main class="productos" id="productos">
+
+  <div class="producto" data-categoria="ropa">
+    <img src="img/camiseta.png">
+    <h2>Camiseta</h2>
+    <p>25 €</p>
+    <button onclick="agregarAlCarrito('Camiseta',25)">Añadir</button>
+  </div>
+
+  <div class="producto" data-categoria="accesorios">
+    <img src="img/gorra.png">
+    <h2>Gorra</h2>
+    <p>20 €</p>
+    <button onclick="agregarAlCarrito('Gorra',20)">Añadir</button>
+  </div>
+
+  <div class="producto" data-categoria="ropa">
+    <img src="img/sudadera.png">
+    <h2>Sudadera</h2>
+    <p>40 €</p>
+    <button onclick="agregarAlCarrito('Sudadera',40)">Añadir</button>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
