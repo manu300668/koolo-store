@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">KO<span>O</span>LO</div>
+
+  <nav class="nav">
+    <ul id="menuList"></ul>
+  </nav>
+
+  <div class="header-icons">
+    <button id="loginBtn">Login</button>
+    <div id="cartIcon">🛒 <span id="cartCount">0</span></div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Estilo que marca tendencia</h1>
+  <p>Descubre nuestra colección</p>
+</section>
+
+<section class="products" id="products"></section>
+
+<!-- CARRITO -->
+<div class="cart-panel" id="cartPanel">
+  <h2>Tu carrito</h2>
+  <div id="cartItems"></div>
+  <button onclick="closeCart()">Cerrar</button>
+</div>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Contraseña">
+    <button onclick="loginAdmin()">Entrar</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-panel" id="adminPanel">
+  <h2>Panel Admin</h2>
+  <button onclick="logoutAdmin()">Cerrar</button>
+
+  <h3>Añadir Producto</h3>
+  <input id="prodName" placeholder="Nombre">
+  <input id="prodPrice" placeholder="Precio">
+  <button onclick="addProduct()">Añadir</button>
+
+  <div id="adminProducts"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
