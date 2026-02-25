@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koolo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">KO<span>O</span>LO</div>
+
+  <nav id="menu"></nav>
+
+  <div class="icons">
+    <div id="cart-icon">🛒 <span id="cart-count">0</span></div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Estilo que marca tendencia</h1>
+  <p>Descubre nuestra colección</p>
+</section>
+
+<section class="products" id="products"></section>
+
+<footer>
+  <div id="socials"></div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPass" placeholder="Contraseña">
+    <button onclick="loginAdmin()">Entrar</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <h2>Panel Admin</h2>
+
+  <h3>Contraseña</h3>
+  <input type="password" id="newPass" placeholder="Nueva contraseña">
+  <button onclick="changePassword()">Cambiar</button>
+
+  <h3>Productos</h3>
+  <input id="prodName" placeholder="Nombre">
+  <input id="prodPrice" placeholder="Precio">
+  <button onclick="addProduct()">Añadir</button>
+  <div id="adminProducts"></div>
+
+  <h3>Categorías</h3>
+  <input id="catName" placeholder="Nueva categoría">
+  <button onclick="addCategory()">Añadir</button>
+  <div id="adminCategories"></div>
+
+  <h3>Redes Sociales</h3>
+  <input id="socialName" placeholder="Nombre red">
+  <input id="socialLink" placeholder="Enlace">
+  <button onclick="addSocial()">Añadir</button>
+  <div id="adminSocials"></div>
+
+  <button onclick="logoutAdmin()">Cerrar Admin</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
