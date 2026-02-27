@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>KOOLO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="KOOLO">
+  </div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="cart-icon" onclick="openCart()">
+    🛒 <span id="cartCount">0</span>
+  </div>
+</header>
+
+<nav class="side-menu" id="sideMenu">
+  <ul id="menuList">
+    <li onclick="loadProducts()">Inicio</li>
+    <li onclick="loadCategories()">Categorías</li>
+    <li onclick="openCart()">Carrito</li>
+    <li id="adminBtn" style="display:none;" onclick="openAdmin()">Admin</li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1>Estilo que marca tendencia</h1>
+  <p>Nueva colección 2026</p>
+</section>
+
+<section class="products">
+  <div id="productsContainer" class="products-grid"></div>
+</section>
+
+<!-- PANEL ADMIN -->
+<div class="admin-panel" id="adminPanel">
+  <h2>Panel Admin</h2>
+
+  <h3>Nuevo Producto</h3>
+  <input type="text" id="newName" placeholder="Nombre">
+  <input type="number" id="newPrice" placeholder="Precio">
+  <input type="text" id="newImage" placeholder="URL Imagen">
+  <input type="text" id="newCategory" placeholder="Categoría">
+  <button onclick="addProduct()">Añadir</button>
+
+  <h3>Nueva Categoría</h3>
+  <input type="text" id="newCategoryName" placeholder="Nombre categoría">
+  <button onclick="addCategory()">Añadir Categoría</button>
+
+  <button onclick="logout()">Cerrar sesión</button>
+</div>
+
+<script>
+
+/* FIREBASE */
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  storageBucket: "koolo2026.firebasestorage.app",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+/* MENU */
+const hamburger = document.getElementById("hamburger");
+const sideMenu = document.getElementById("sideMenu");
+
+hamburger.onclick = () => {
+  sideMenu.classList.toggle("open");
+};
+
+/* AUTH */
+auth.onAuthStateChanged(user => {
+  if(user){
+    document.getElementById("adminBtn").style.display = "block";
+  } else {
+    document.getElementById("adminBtn").style.display = "none";
+    document.getElementById("adminPanel").style.display = "none";
+  }
+});
+
+function openAdmin(){
+  document.getElementById("adminPanel").style.display = "block";
+}
+
+function logout(){
+  auth.signOut();
+}
+
+/* PRODUCTOS */
+function addProduct(){
+  db.collection("products").add({
+    name: newName.value,
+    price: newPrice.value,
+    image: newImage.value,
+    category: newCategory.value
+  }).then(() => {
+    alert("Producto añadido");
+    loadProducts();
+  });
+}
+
+function loadProducts(){
+  const container = document.getElementById("productsContainer");
+  container.innerHTML = "";
+
+  db.collection("products").get().then(snapshot => {
+    snapshot.forEach(doc => {
+      const p = doc.data();
+      container.innerHTML += `
+        <div class="product-card">
+          <img src="${p.image}">
+          <h3>${p.name}</h3>
+          <p>${p.price}€</p>
+        </div>
+      `;
+    });
+  });
+}
+
+/* CATEGORÍAS */
+function addCategory(){
+  db.collection("categories").add({
+    name: newCategoryName.value
+  }).then(() => {
+    alert("Categoría añadida");
+  });
+}
+
+function loadCategories(){
+  const container = document.getElementById("productsContainer");
+  container.innerHTML = "<h2>Categorías</h2>";
+
+  db.collection("categories").get().then(snapshot => {
+    snapshot.forEach(doc => {
+      const c = doc.data();
+      container.innerHTML += `<div class="category-item">${c.name}</div>`;
+    });
+  });
+}
+
+/* CARRITO */
+function openCart(){
+  alert("Carrito próximamente profesional 🔥");
+}
+
+window.onload = loadProducts;
+
+</script>
+</body>
+</html>
