@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>KOOLO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDK compat -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">KO<span>O</span>LO</div>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="side-menu" id="sideMenu">
+    <ul>
+      <li onclick="loadProducts()">Inicio</li>
+      <li>Ropa</li>
+      <li>Accesorios</li>
+      <li onclick="openLogin()">Admin</li>
+    </ul>
+  </nav>
+
+  <div class="cart-icon">
+    🛒 <span id="cartCount">0</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Estilo que marca tendencia</h1>
+  <p>Nueva colección 2026</p>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="products">
+  <div id="productsContainer" class="products-grid"></div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <h2>Admin Login</h2>
+    <input type="email" id="adminEmail" placeholder="Email">
+    <input type="password" id="adminPassword" placeholder="Contraseña">
+    <button onclick="loginAdmin()">Entrar</button>
+    <button onclick="closeLogin()">Cancelar</button>
+  </div>
+</div>
+
+<!-- PANEL ADMIN -->
+<div class="admin-panel" id="adminPanel" style="display:none;">
+  <h2>Panel Admin</h2>
+
+  <input type="text" id="newProductName" placeholder="Nombre producto">
+  <input type="number" id="newProductPrice" placeholder="Precio">
+  <input type="text" id="newProductImage" placeholder="URL imagen">
+  <button onclick="addProduct()">Añadir Producto</button>
+
+  <button onclick="logoutAdmin()">Cerrar sesión</button>
+</div>
+
+<script>
+/* ===============================
+   FIREBASE CONFIG
+================================ */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  storageBucket: "koolo2026.firebasestorage.app",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+/* ===============================
+   HAMBURGUESA
+================================ */
+
+const hamburger = document.getElementById("hamburger");
+const sideMenu = document.getElementById("sideMenu");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  sideMenu.classList.toggle("open");
+  document.body.classList.toggle("menu-open");
+});
+
+/* ===============================
+   LOGIN
+================================ */
+
+function openLogin(){
+  document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeLogin(){
+  document.getElementById("loginModal").style.display = "none";
+}
+
+function loginAdmin(){
+  const email = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      closeLogin();
+      alert("Bienvenido Admin");
+    })
+    .catch(error => {
+      alert("Error: " + error.message);
+    });
+}
+
+function logoutAdmin(){
+  auth.signOut();
+}
+
+/* ===============================
+   ADMIN PANEL CONTROL
+================================ */
+
+auth.onAuthStateChanged(user => {
+  if(user){
+    document.getElementById("adminPanel").style.display = "block";
+  } else {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+});
+
+/* ===============================
+   PRODUCTOS FIRESTORE
+================================ */
+
+function addProduct(){
+  const name = document.getElementById("newProductName").value;
+  const price = document.getElementById("newProductPrice").value;
+  const image = document.getElementById("newProductImage").value;
+
+  db.collection("products").add({
+    name,
+    price,
+    image
+  }).then(() => {
+    alert("Producto añadido");
+    loadProducts();
+  });
+}
+
+function loadProducts(){
+  const container = document.getElementById("productsContainer");
+  container.innerHTML = "";
+
+  db.collection("products").get().then(snapshot => {
+    snapshot.forEach(doc => {
+      const product = doc.data();
+
+      container.innerHTML += `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.price}€</p>
+        </div>
+      `;
+    });
+  });
+}
+
+window.onload = loadProducts;
+
+</script>
+
+</body>
+</html>
