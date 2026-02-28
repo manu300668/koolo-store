@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOOLO</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#000;
+  color:#fff;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  background:#111;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo img{
+  height:40px;
+}
+
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.nav-links li{
+  cursor:pointer;
+  transition:.3s;
+}
+
+.nav-links li:hover{
+  color:#aaa;
+}
+
+/* HAMBURGER */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.hamburger span{
+  width:25px;
+  height:3px;
+  background:white;
+}
+
+@media(max-width:768px){
+  .nav-links{
+    position:absolute;
+    top:60px;
+    right:0;
+    background:#111;
+    flex-direction:column;
+    width:200px;
+    padding:20px;
+    display:none;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .hamburger{
+    display:flex;
+  }
+}
+
+/* SECCIONES */
+section{
+  padding:40px;
+  display:none;
+}
+
+#inicio{
+  display:block;
+  text-align:center;
+}
+
+.hero{
+  height:70vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+.hero h1{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+
+/* BOTONES */
+button{
+  padding:10px 20px;
+  background:#fff;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+}
+button:hover{
+  background:#ccc;
+}
+</style>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="KOOLO">
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li onclick="showSection('inicio')">Inicio</li>
+    <li onclick="showSection('categorias')">Categorías</li>
+    <li onclick="showSection('carrito')">Carrito 🛒</li>
+    <li id="adminBtn" style="display:none;" onclick="showSection('admin')">Admin</li>
+  </ul>
+
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- INICIO -->
+<section id="inicio">
+  <div class="hero">
+    <h1>KOOLO 2026</h1>
+    <p>Nueva colección disponible</p>
+  </div>
+</section>
+
+<!-- CATEGORIAS -->
+<section id="categorias">
+  <h2>Categorías</h2>
+  <p>Ropa</p>
+  <p>Accesorios</p>
+</section>
+
+<!-- CARRITO -->
+<section id="carrito">
+  <h2>Tu Carrito</h2>
+  <p>No hay productos añadidos todavía.</p>
+</section>
+
+<!-- ADMIN -->
+<section id="admin">
+  <h2>Panel Admin</h2>
+  <button onclick="logoutAdmin()">Cerrar sesión</button>
+</section>
+
+<script>
+
+// 🔥 FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  storageBucket: "koolo2026.firebasestorage.app",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+// 🍔 HAMBURGER
+document.getElementById("hamburger").addEventListener("click",()=>{
+  document.getElementById("navLinks").classList.toggle("active");
+});
+
+// 🔄 CAMBIO SECCIONES
+function showSection(id){
+  document.querySelectorAll("section").forEach(sec=>{
+    sec.style.display="none";
+  });
+  document.getElementById(id).style.display="block";
+}
+
+// 🔐 CONTROL ADMIN
+auth.onAuthStateChanged(user=>{
+  const adminBtn=document.getElementById("adminBtn");
+  if(user){
+    adminBtn.style.display="block";
+  }else{
+    adminBtn.style.display="none";
+  }
+});
+
+// 🔑 LOGIN (temporal para probar)
+function loginAdmin(){
+  const email=prompt("Email:");
+  const pass=prompt("Password:");
+  auth.signInWithEmailAndPassword(email,pass)
+  .then(()=>alert("Login correcto"))
+  .catch(err=>alert(err.message));
+}
+
+// 🚪 LOGOUT
+function logoutAdmin(){
+  auth.signOut();
+}
+
+</script>
+
+</body>
+</html>
