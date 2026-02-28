@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Admin</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+<style>
+body{background:#000;color:white;font-family:Arial;padding:40px}
+button{padding:10px 20px}
+</style>
+</head>
+<body>
+
+<h1>Panel Admin KOOLO</h1>
+<button onclick="logout()">Cerrar sesión</button>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+const ADMIN_EMAIL = "eumanu@msn.com";
+
+auth.onAuthStateChanged(user=>{
+  if(!user || user.email !== ADMIN_EMAIL){
+    window.location.href="login.html";
+  }
+});
+
+function logout(){
+  auth.signOut().then(()=>{
+    window.location.href="index.html";
+  });
+}
+</script>
+
+</body>
+</html>
