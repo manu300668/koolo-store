@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login Admin</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+<style>
+body{background:#000;color:white;font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh}
+.box{background:#111;padding:30px;border-radius:10px;width:300px}
+input{width:100%;padding:10px;margin:10px 0;background:#222;border:none;color:white}
+button{width:100%;padding:10px;background:white;border:none;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Login Admin</h2>
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Contraseña">
+<button onclick="login()">Entrar</button>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function login(){
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email,pass)
+  .then(()=>{
+    window.location.href="admin.html";
+  })
+  .catch(err=>{
+    alert(err.message);
+  });
+}
+</script>
+
+</body>
+</html>
