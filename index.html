@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOOLO</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<style>
+body{margin:0;background:#000;color:white;font-family:Arial,sans-serif;}
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;background:#111;position:sticky;top:0;}
+.logo img{height:40px;}
+nav{display:flex;align-items:center;gap:20px;}
+nav a{color:white;text-decoration:none;font-weight:bold;cursor:pointer;}
+#adminBtn{display:none;}
+.cart-icon{position:relative;cursor:pointer;font-size:20px;}
+.cart-count{position:absolute;top:-8px;right:-10px;background:red;font-size:12px;padding:3px 6px;border-radius:50%;}
+.cart-panel{position:fixed;right:-400px;top:0;width:350px;height:100%;background:#111;padding:20px;transition:0.3s;overflow-y:auto;z-index:1000;}
+.cart-panel.active{right:0;}
+.cart-item{border-bottom:1px solid #333;padding:10px 0;}
+button{background:white;color:black;border:none;padding:8px 12px;cursor:pointer;margin-top:5px;border-radius:5px;}
+.hero{text-align:center;padding:60px 20px;background:linear-gradient(to right,#000,#111);}
+.hero h1{font-size:2.5rem;margin-bottom:10px;}
+.products{padding:40px 20px;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.product-card{background:#111;padding:15px;border-radius:8px;text-align:center;}
+.product-card img{width:100%;height:200px;object-fit:cover;border-radius:6px;margin-bottom:10px;}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="KOOLO">
+  </div>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="#">Categorías</a>
+    <div class="cart-icon" onclick="toggleCart()">🛒<span class="cart-count" id="cartCount">0</span></div>
+    <a href="admin.html" id="adminBtn">Admin</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Nueva Colección 2026</h1>
+  <p>Estilo urbano premium</p>
+</section>
+
+<section class="products">
+  <h2>Productos</h2>
+  <div class="products-grid" id="products"></div>
+</section>
+
+<!-- PANEL CARRITO -->
+<div class="cart-panel" id="cartPanel">
+  <h2>Carrito</h2>
+  <div id="cartItems"></div>
+  <h3>Total: <span id="cartTotal">0</span> €</h3>
+  <button onclick="goToCheckout()">Finalizar compra</button>
+  <button onclick="clearCart()">Vaciar carrito</button>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+// 🔹 FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+const ADMIN_EMAIL = "eumanu@msn.com";
+const adminBtn = document.getElementById("adminBtn");
+
+// 🔹 ADMIN
+auth.onAuthStateChanged(user=>{
+  if(user && user.email===ADMIN_EMAIL) adminBtn.style.display="inline";
+  else adminBtn.style.display="none";
+});
+
+// 🔹 PRODUCTOS
+db.collection("products").onSnapshot(snapshot=>{
+  const container = document.getElementById("products");
+  container.innerHTML="";
+  snapshot.forEach(doc=>{
+    const data = doc.data();
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${data.image}" alt="${data.name}">
+        <h3>${data.name}</h3>
+        <p>${data.price} €</p>
+        <button onclick="addToCart('${data.name}',${data.price})">Añadir al carrito</button>
+      </div>
+    `;
+  });
+});
+
+// 🔹 CARRITO
+let cart = JSON.parse(localStorage.getItem("cart"))||[];
+function saveCart(){localStorage.setItem("cart",JSON.stringify(cart));}
+function updateCart(){
+  const cartItems=document.getElementById("cartItems");
+  const cartCount=document.getElementById("cartCount");
+  const cartTotal=document.getElementById("cartTotal");
+  cartItems.innerHTML="";
+  let total=0;
+  cart.forEach((item,index)=>{
+    total+=item.price;
+    cartItems.innerHTML+=`<div class="cart-item">${item.name} - ${item.price} €<br><button onclick="removeFromCart(${index})">Eliminar</button></div>`;
+  });
+  cartCount.innerText=cart.length;
+  cartTotal.innerText=total.toFixed(2);
+  saveCart();
+}
+function addToCart(name,price){cart.push({name,price});updateCart();}
+function removeFromCart(index){cart.splice(index,1);updateCart();}
+function clearCart(){cart=[];updateCart();}
+function toggleCart(){document.getElementById("cartPanel").classList.toggle("active");}
+function goToCheckout(){
+  if(cart.length===0){alert("Tu carrito está vacío");return;}
+  localStorage.setItem("checkoutCart",JSON.stringify(cart));
+  window.location.href="checkout.html";
+}
+updateCart();
+</script>
+
+</body>
+</html>
