@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Admin - KOOLO</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<style>
+body{background:#000;color:white;font-family:Arial;padding:40px}
+input{padding:8px;margin:5px;width:250px}
+button{padding:8px 12px;margin:5px;cursor:pointer}
+.card{background:#111;padding:15px;margin-top:10px;border-radius:8px}
+.delete{background:red;color:white}
+</style>
+</head>
+<body>
+
+<h1>Panel Admin</h1>
+<button onclick="logout()">Cerrar sesión</button>
+
+<h2>Agregar Producto</h2>
+<input type="text" id="name" placeholder="Nombre">
+<input type="number" id="price" placeholder="Precio">
+<input type="text" id="image" placeholder="URL Imagen">
+<button onclick="addProduct()">Guardar</button>
+
+<h2>Productos</h2>
+<div id="productList"></div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const ADMIN_EMAIL = "eumanu@msn.com";
+
+auth.onAuthStateChanged(user=>{
+  if(!user || user.email !== ADMIN_EMAIL){
+    window.location.href="login.html";
+  } else {
+    loadProducts();
+  }
+});
+
+function logout(){
+  auth.signOut().then(()=>window.location.href="index.html");
+}
+
+function addProduct(){
+  const name = document.getElementById("name").value;
+  const price = document.getElementById("price").value;
+  const image = document.getElementById("image").value;
+
+  db.collection("products").add({
+    name,
+    price,
+    image
+  });
+}
+
+function loadProducts(){
+  db.collection("products").onSnapshot(snapshot=>{
+    const list = document.getElementById("productList");
+    list.innerHTML="";
+
+    snapshot.forEach(doc=>{
+      const data = doc.data();
+      list.innerHTML+=`
+        <div class="card">
+          <strong>${data.name}</strong><br>
+          ${data.price} €<br>
+          <img src="${data.image}" width="150"><br>
+          <button onclick="editPrice('${doc.id}')">Editar precio</button>
+          <button class="delete" onclick="deleteProduct('${doc.id}')">Eliminar</button>
+        </div>
+      `;
+    });
+  });
+}
+
+function deleteProduct(id){
+  db.collection("products").doc(id).delete();
+}
+
+function editPrice(id){
+  const newPrice = prompt("Nuevo precio:");
+  if(newPrice){
+    db.collection("products").doc(id).update({
+      price:newPrice
+    });
+  }
+}
+</script>
+
+</body>
+</html>
