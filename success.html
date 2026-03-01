@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pago completado - KOOLO</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 60px 20px;
+  background: #f5f5f5;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: green;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="content">
+  <h1>Procesando pedido...</h1>
+  <p>No cierres esta página.</p>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AQUI_VA_TU_API_KEY",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  storageBucket: "koolo2026.firebasestorage.app",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function processOrder() {
+
+  // Evitar doble ejecución
+  if(localStorage.getItem("orderProcessed")) {
+    document.getElementById("content").innerHTML = `
+      <h1>Pedido ya procesado ✅</h1>
+      <button onclick="window.location.href='index.html'">Volver a la tienda</button>
+    `;
+    return;
+  }
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if(cart.length === 0) {
+    document.getElementById("content").innerHTML = `
+      <h1>No hay productos en el pedido</h1>
+      <button onclick="window.location.href='index.html'">Volver</button>
+    `;
+    return;
+  }
+
+  try {
+
+    // 🔐 Descontar stock de forma segura
+    for(const item of cart) {
+
+      const productRef = db.collection("products").doc(item.id);
+
+      await db.runTransaction(async (transaction) => {
+
+        const doc = await transaction.get(productRef);
+
+        if (!doc.exists) {
+          throw "Producto no existe";
+        }
+
+        const currentStock = doc.data().stock;
+
+        if(currentStock < item.quantity) {
+          throw "Stock insuficiente";
+        }
+
+        transaction.update(productRef, {
+          stock: currentStock - item.quantity
+        });
+
+      });
+
+    }
+
+    // 🧾 Guardar pedido
+    await db.collection("orders").add({
+      items: cart,
+      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      status: "Pagado",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // 🧹 Limpiar carrito
+    localStorage.removeItem("cart");
+    localStorage.setItem("orderProcessed", "true");
+
+    document.getElementById("content").innerHTML = `
+      <h1>Pedido confirmado 🎉</h1>
+      <p>Gracias por tu compra.</p>
+      <button onclick="window.location.href='index.html'">Volver a la tienda</button>
+    `;
+
+  } catch(error) {
+
+    console.error(error);
+
+    document.getElementById("content").innerHTML = `
+      <h1>Error al procesar el pedido ❌</h1>
+      <p>${error}</p>
+      <button onclick="window.location.href='cart.html'">Volver al carrito</button>
+    `;
+  }
+}
+
+processOrder();
+</script>
+
+</body>
+</html>
