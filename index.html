@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOOLO - Streetwear Premium</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <!-- HAMBURGUESA a la izquierda -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="img/koolo_logo.png" alt="KOOLO" class="logo-img">
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="nav-right">
+    <div class="categories-menu" id="categoriesMenu"></div>
+    <div class="cart-icon" id="cartIcon" onclick="window.location.href='cart.html'">
+      🛒 <span id="cartCount">0</span>
+    </div>
+    <a href="admin.html" class="admin-btn">Admin</a>
+    <button id="logoutBtn" style="display:none;">Cerrar sesión</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Nueva Colección 2026</h1>
+    <p>Streetwear minimalista con estilo premium</p>
+    <a href="#productsList" class="hero-btn">Ver Colección</a>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<div class="products-container" id="productsList"></div>
+
+<script src="login.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
