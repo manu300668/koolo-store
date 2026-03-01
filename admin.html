@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - KOOLO</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f4f4f4;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}
+
+.order-card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+button {
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.enviar { background: orange; color: white; }
+.entregado { background: green; color: white; }
+.eliminar { background: red; color: white; }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>Panel Admin - KOOLO</h2>
+</header>
+
+<div class="container">
+  <h3>Pedidos</h3>
+  <div id="ordersList"></div>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AQUI_VA_TU_API_KEY",
+  authDomain: "koolo2026.firebaseapp.com",
+  projectId: "koolo2026",
+  storageBucket: "koolo2026.firebasestorage.app",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+// 🔒 Bloquear acceso si no eres admin
+auth.onAuthStateChanged(user => {
+  if(!user || user.email !== "eumanu@msn.com"){
+    alert("Acceso denegado ❌");
+    window.location.href = "index.html";
+  }
+});
+
+// 📦 Cargar pedidos en tiempo real
+db.collection("orders")
+.orderBy("createdAt","desc")
+.onSnapshot(snapshot => {
+
+  const container = document.getElementById("ordersList");
+  container.innerHTML = "";
+
+  snapshot.forEach(doc => {
+
+    const order = doc.data();
+    const date = order.createdAt?.toDate().toLocaleString() || "Procesando...";
+
+    let itemsHTML = "";
+    order.items.forEach(item => {
+      itemsHTML += `<li>${item.name} x${item.quantity}</li>`;
+    });
+
+    container.innerHTML += `
+      <div class="order-card">
+        <strong>Total:</strong> ${order.total.toFixed(2)} €<br>
+        <strong>Estado:</strong> ${order.status}<br>
+        <strong>Fecha:</strong> ${date}
+        <ul>${itemsHTML}</ul>
+
+        <button class="enviar" onclick="updateStatus('${doc.id}','Enviado')">Marcar Enviado</button>
+        <button class="entregado" onclick="updateStatus('${doc.id}','Entregado')">Marcar Entregado</button>
+        <button class="eliminar" onclick="deleteOrder('${doc.id}')">Eliminar</button>
+      </div>
+    `;
+  });
+});
+
+// 🔄 Cambiar estado
+function updateStatus(id,status){
+  db.collection("orders").doc(id).update({
+    status: status
+  });
+}
+
+// 🗑 Eliminar pedido
+function deleteOrder(id){
+  if(confirm("¿Eliminar pedido?")){
+    db.collection("orders").doc(id).delete();
+  }
+}
+</script>
+
+</body>
+</html>
