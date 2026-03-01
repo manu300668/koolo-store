@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Completado - KOOLO</title>
+<style>
+body {margin:0;background:#000;color:white;font-family:Arial,sans-serif;text-align:center;padding:50px;}
+h1 {font-size:2.5rem;color:#0f0;}
+p {font-size:1.2rem;margin:20px 0;}
+button {padding:10px 20px;background:white;color:black;border:none;border-radius:5px;cursor:pointer;font-weight:bold;}
+.order-summary {background:#111;padding:20px;margin:30px auto;border-radius:8px;max-width:400px;text-align:left;}
+.order-summary h2 {text-align:center;margin-bottom:15px;}
+.order-summary p {margin:5px 0;}
+</style>
+</head>
+<body>
+
+<h1>¡Pedido completado!</h1>
+<p>Gracias por tu compra. Tu pedido ha sido registrado correctamente.</p>
+
+<div class="order-summary" id="orderSummary">
+  <h2>Resumen de tu pedido</h2>
+</div>
+
+<button onclick="goToStore()">Volver a la tienda</button>
+
+<script>
+const cart = JSON.parse(localStorage.getItem('checkoutCart')) || [];
+const summary = document.getElementById('orderSummary');
+let total = 0;
+
+cart.forEach(item=>{
+  total += item.price;
+  summary.innerHTML += `<p>${item.name} - ${item.price.toFixed(2)} €</p>`;
+});
+summary.innerHTML += `<hr><p><strong>Total: ${total.toFixed(2)} €</strong></p>`;
+
+// Limpiar carrito
+localStorage.removeItem('checkoutCart');
+localStorage.removeItem('cart');
+
+function goToStore() {
+  window.location.href = 'index.html';
+}
+</script>
+
+</body>
+</html>
