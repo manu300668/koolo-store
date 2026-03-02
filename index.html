@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOOLO</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- HEADER -->
+<header id="header">
+
+  <!-- HAMBURGUESA -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="img/koolo_logo.png" alt="KOOLO">
+  </div>
+
+  <!-- DERECHA -->
+  <div class="header-right">
+    <a href="admin.html" class="admin-btn" id="adminBtn" style="display:none;">Admin</a>
+    <div class="cart-icon" id="cartIcon">
+      🛒 <span id="cartCount">0</span>
+    </div>
+  </div>
+
+</header>
+
+<!-- MENÚ LATERAL -->
+<div class="nav-menu" id="navMenu">
+  <a href="#">Inicio</a>
+  <a href="#productsList">Colección</a>
+</div>
+
+<!-- CARRITO PANEL -->
+<div class="cart-panel" id="cartPanel">
+  <h2>Tu Carrito</h2>
+  <div id="cartItems"></div>
+  <p>Total: €<span id="cartTotal">0</span></p>
+  <button onclick="checkout()">Finalizar compra</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>KOOLO 2026</h1>
+    <p>Streetwear minimalista premium</p>
+    <a href="#productsList">Ver Colección</a>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="products" id="productsList"></section>
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
