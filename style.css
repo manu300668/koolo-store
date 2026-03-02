@@ -1,0 +1,234 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* =========================
+   HEADER NEGRO
+========================= */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #000000 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+/* =========================
+   HAMBURGUESA IZQUIERDA
+========================= */
+
+.hamburger {
+  width: 28px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+/* =========================
+   LOGO CENTRADO
+========================= */
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo img {
+  height: 28px;
+  filter: brightness(0) invert(1);
+}
+
+/* =========================
+   DERECHA (ADMIN + CARRITO)
+========================= */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cart-icon {
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.cart-icon span {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* =========================
+   ESPACIO POR HEADER FIJO
+========================= */
+
+.products {
+  margin-top: 100px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* =========================
+   TARJETAS PRODUCTO
+========================= */
+
+.product-card img {
+  width: 100%;
+  display: block;
+}
+
+.product-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.product-card p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.product-card button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product-card button:hover {
+  opacity: 0.8;
+}
+
+/* =========================
+   MENÚ LATERAL
+========================= */
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 100px 20px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.nav-menu.active {
+  left: 0;
+}
+
+.nav-menu a {
+  display: block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 16px;
+}
+
+/* =========================
+   OVERLAY OSCURO
+========================= */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 998;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* =========================
+   CARRITO LATERAL
+========================= */
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 100px 20px 20px 20px;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 999;
+}
+
+.cart-panel.active {
+  right: 0;
+}
+
+.cart-panel h2 {
+  margin-bottom: 20px;
+}
+
+.cart-panel button {
+  width: 100%;
+  padding: 12px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+}
