@@ -125,3 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+setTimeout(() => {
+  const btn = document.getElementById("adminBtn");
+  if (btn) btn.style.display = "block";
+}, 1000);
