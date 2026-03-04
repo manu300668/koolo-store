@@ -11,7 +11,27 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
+<script>
+const firebaseConfig = {
+  apiKey: "TU_API_KEY_AQUI",
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_STORAGE_BUCKET",
+  messagingSenderId: "TU_SENDER_ID",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
 
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+const ADMIN_EMAIL = "eumanu@msn.com";
+
+auth.onAuthStateChanged(user => {
+  if (!user || user.email !== ADMIN_EMAIL) {
+    window.location.href = "login.html";
+  }
+});
+</script>
 <body>
 
 <h1 style="margin-top:120px; text-align:center;">Panel Admin</h1>
