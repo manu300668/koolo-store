@@ -1,0 +1,99 @@
+body{
+margin:0;
+font-family:Helvetica,Arial,sans-serif;
+background:white;
+color:black;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:black;
+color:white;
+}
+
+.logo img{
+height:40px;
+}
+
+.nav a{
+color:white;
+text-decoration:none;
+margin-left:30px;
+font-size:15px;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.admin-btn{
+color:white;
+text-decoration:none;
+}
+
+.cart-icon{
+cursor:pointer;
+}
+
+/* PRODUCTOS */
+
+.products{
+padding:40px;
+}
+
+.products-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:30px;
+}
+
+.product{
+text-align:center;
+}
+
+.product img{
+width:100%;
+}
+
+.product h3{
+margin:10px 0;
+}
+
+.product button{
+background:black;
+color:white;
+border:none;
+padding:10px 20px;
+cursor:pointer;
+}
+
+/* CARRITO */
+
+.cart-panel{
+position:fixed;
+right:-400px;
+top:0;
+width:350px;
+height:100%;
+background:white;
+box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+padding:30px;
+transition:0.3s;
+overflow:auto;
+}
+
+.cart-panel.open{
+right:0;
+}
+
+.cart-total{
+font-size:20px;
+margin-top:20px;
+}
