@@ -19,7 +19,7 @@ const loginError = document.getElementById("loginError");
 
 // Configura aquí tu correo y contraseña
 const ADMIN_EMAIL = "eumanu@msn.com";
-const ADMIN_PASS = "TU_CONTRASEÑA_ADMIN";
+const ADMIN_PASS = "Manu68.";
 
 loginBtn.onclick = () => {
     const email = document.getElementById("adminEmail").value;
