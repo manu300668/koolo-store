@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOOLO Admin</title>
+<link rel="stylesheet" href="admin.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+</head>
+
+<body>
+
+<h1>Admin Panel KOOLO</h1>
+
+<!-- LOGIN MANUAL -->
+<div id="loginDiv">
+<h2>Iniciar sesión</h2>
+<input type="email" id="adminEmail" placeholder="Correo">
+<input type="password" id="adminPass" placeholder="Contraseña">
+<button id="loginBtn">Login</button>
+<p id="loginError" style="color:red;"></p>
+</div>
+
+<!-- PANEL ADMIN -->
+<div id="adminPanel" style="display:none;">
+
+<h2>Productos</h2>
+<form id="productForm">
+<input type="text" id="prodName" placeholder="Nombre" required>
+<input type="number" id="prodPrice" placeholder="Precio" required>
+<input type="text" id="prodCategory" placeholder="Categoría" required>
+<input type="file" id="prodImage" accept="image/*" required>
+<button type="submit">Añadir/Actualizar Producto</button>
+</form>
+
+<div id="productsList"></div>
+
+<h2>Pedidos</h2>
+<div id="ordersList"></div>
+
+<h2>Estadísticas</h2>
+<p>Total pedidos: <span id="totalOrders">0</span></p>
+<p>Total ventas: €<span id="totalSales">0</span></p>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
