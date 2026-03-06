@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin KOOLO</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Admin KOOLO</h1>
+
+<a href="index.html">Ir a tienda</a>
+
+</header>
+
+
+<section class="panel">
+
+<h2>Nuevo producto</h2>
+
+<input id="nombre" placeholder="Nombre producto">
+
+<input id="precio" placeholder="Precio">
+
+<input type="file" id="imagen">
+
+<button onclick="addProduct()">Guardar producto</button>
+
+</section>
+
+
+
+<section class="panel">
+
+<h2>Productos</h2>
+
+<div id="productsAdmin"></div>
+
+</section>
+
+
+
+<section class="panel">
+
+<h2>Pedidos</h2>
+
+<div id="ordersAdmin"></div>
+
+</section>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
