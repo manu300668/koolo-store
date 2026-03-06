@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KOOLO</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- PAYPAL -->
+<script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID&currency=EUR"></script>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<!-- LOGO -->
+<div class="logo">
+<a href="index.html">
+<img src="img/koolo_logo.png" alt="KOOLO">
+</a>
+</div>
+
+<!-- MENU -->
+<nav class="nav">
+
+<a href="index.html">Inicio</a>
+
+</nav>
+
+<!-- DERECHA -->
+
+<div class="header-right">
+
+<a href="login.html" class="admin-btn">Admin</a>
+
+<div class="cart-icon" id="cartIcon">
+
+🛒 <span id="cartCount">0</span>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- CARRITO -->
+
+<div class="cart-panel" id="cartPanel">
+
+<h2>Tu carrito</h2>
+
+<div id="cartItems"></div>
+
+<p class="cart-total">
+Total: €<span id="cartTotal">0</span>
+</p>
+
+<div id="paypal-button-container"></div>
+
+</div>
+
+
+<!-- PRODUCTOS -->
+
+<section class="products">
+
+<div id="productsList" class="products-grid"></div>
+
+</section>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
