@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin KOOLO</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1>Panel Admin KOOLO</h1>
+
+
+<h2>Añadir producto</h2>
+
+<input id="name" placeholder="Nombre">
+
+<input id="price" placeholder="Precio">
+
+<input id="image" placeholder="URL imagen">
+
+<button onclick="addProduct()">Crear producto</button>
+
+
+<h2>Configuración tienda</h2>
+
+<input id="instagram" placeholder="Instagram URL">
+<input id="tiktok" placeholder="TikTok URL">
+<input id="twitter" placeholder="Twitter URL">
+
+<button onclick="saveSettings()">Guardar</button>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+authDomain: "koolo2026.firebaseapp.com",
+projectId: "koolo2026",
+storageBucket: "koolo2026.firebasestorage.app",
+messagingSenderId: "612039099714",
+appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+</script>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
