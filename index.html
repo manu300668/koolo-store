@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>KOOLO</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="menu-icon" onclick="toggleMenu()">
+☰
+</div>
+
+<div class="logo">
+<a href="index.html">KOOLO</a>
+</div>
+
+<div class="header-right">
+
+<button onclick="openLogin()">Login</button>
+
+<a href="admin.html" id="adminBtn" style="display:none">Admin</a>
+
+<div class="cart-icon">
+🛒 <span id="cartCount">0</span>
+</div>
+
+</div>
+
+</header>
+
+
+<nav id="mobileMenu">
+
+<a href="#">Shop</a>
+<a href="#">Contacto</a>
+
+</nav>
+
+
+<main>
+
+<div class="products" id="products"></div>
+
+</main>
+
+
+<footer>
+
+<div class="socials">
+
+<a id="instagramLink">Instagram</a>
+<a id="tiktokLink">TikTok</a>
+<a id="twitterLink">Twitter</a>
+
+</div>
+
+</footer>
+
+
+<!-- LOGIN -->
+
+<div class="login-modal" id="loginModal">
+
+<div class="login-box">
+
+<h2>Login</h2>
+
+<input type="email" id="userEmail" placeholder="Email">
+<input type="password" id="userPass" placeholder="Password">
+
+<button onclick="loginUser()">Entrar</button>
+<button onclick="registerUser()">Crear cuenta</button>
+
+<button onclick="closeLogin()">Cerrar</button>
+
+<p id="loginError"></p>
+
+</div>
+
+</div>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+
+<script>
+
+const firebaseConfig = {
+apiKey: "TU_APIKEY",
+authDomain: "koolo2026.firebaseapp.com",
+projectId: "koolo2026",
+storageBucket: "koolo2026.firebasestorage.app",
+messagingSenderId: "612039099714",
+appId: "1:612039099714:web:38d14c2d43851c225c74db"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
