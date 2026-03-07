@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Admin koolo</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+
+<h1>Panel Admin AcLimPro</h1>
+
+<section>
+
+<h2>Agregar producto</h2>
+
+<input id="nombre" placeholder="Nombre">
+<input id="precio" placeholder="Precio">
+<input id="imagen" placeholder="URL imagen">
+
+<button onclick="agregarProducto()">Agregar</button>
+
+</section>
+
+<section>
+
+<h2>Configuración web</h2>
+
+<input id="titulo" placeholder="Título web">
+
+<input id="subtitulo" placeholder="Subtítulo">
+
+<input id="logo" placeholder="URL Logo">
+
+<input id="facebook" placeholder="Facebook">
+
+<input id="instagram" placeholder="Instagram">
+
+<input id="tiktok" placeholder="TikTok">
+
+<button onclick="guardarConfig()">Guardar</button>
+
+</section>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
