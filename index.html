@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>KOOLO</title>
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1 id="logo">KOOLO</h1>
+
+<nav>
+
+<button onclick="inicio()">Inicio</button>
+<button onclick="verCarrito()">Carrito</button>
+<button onclick="loginCliente()">Login</button>
+<button id="adminBtn" onclick="window.location='admin.html'" style="display:none">Admin</button>
+
+</nav>
+
+</header>
+
+
+<section id="productos"></section>
+
+
+<section id="carrito" style="display:none">
+
+<h2>Carrito</h2>
+
+<div id="listaCarrito"></div>
+
+<div id="paypal-button-container"></div>
+
+</section>
+
+
+<footer>
+
+<div id="redes"></div>
+
+<p>© 2026 Koolo</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
