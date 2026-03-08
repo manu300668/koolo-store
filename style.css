@@ -1,0 +1,104 @@
+body{
+  margin:0;
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background:#fff;
+  color:#111;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#111;
+  padding:15px 30px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+header img{
+  height:50px;
+}
+
+nav a{
+  color:white;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.productos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:30px;
+}
+
+.producto{
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+.producto img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+
+.producto h3{
+  font-weight:700;
+  color:#111;
+  margin:10px 0 5px;
+}
+
+.producto p{
+  color:#333;
+  font-size:14px;
+}
+
+button{
+  background:#111;
+  border:none;
+  padding:12px 25px;
+  color:white;
+  border-radius:5px;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#333;
+}
+
+#carritoPanel{
+  position:fixed;
+  right:-420px;
+  top:0;
+  width:400px;
+  max-width:90%;
+  height:100%;
+  background:white;
+  box-shadow:-3px 0 15px rgba(0,0,0,0.3);
+  padding:20px;
+  transition:0.4s;
+  overflow-y:auto;
+  z-index:999;
+}
+
+footer{
+  background:#111;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+footer .redes a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+}
