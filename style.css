@@ -1,0 +1,176 @@
+body{
+
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f5f5;
+
+}
+
+/* HEADER */
+
+header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:black;
+
+padding:15px 30px;
+
+}
+
+/* LOGO */
+
+.logo img{
+
+height:50px;
+
+}
+
+/* MENU */
+
+nav{
+
+display:flex;
+align-items:center;
+gap:20px;
+
+}
+
+nav a{
+
+color:white;
+text-decoration:none;
+font-weight:bold;
+
+}
+
+nav button{
+
+background:white;
+border:none;
+padding:8px 12px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+/* PRODUCTOS */
+
+.productos{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+padding:40px;
+
+}
+
+/* TARJETA PRODUCTO */
+
+.producto{
+
+background:white;
+
+padding:20px;
+
+border-radius:10px;
+
+text-align:center;
+
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+}
+
+.producto img{
+
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+border-radius:5px;
+
+}
+
+.producto h3{
+
+margin:10px 0;
+
+}
+
+.producto button{
+
+background:black;
+
+color:white;
+
+border:none;
+
+padding:10px;
+
+cursor:pointer;
+
+}
+
+/* FOOTER */
+
+footer{
+
+background:black;
+
+color:white;
+
+text-align:center;
+
+padding:30px;
+
+}
+
+.redes{
+
+margin-bottom:10px;
+
+}
+
+.redes a{
+
+color:white;
+
+margin:0 10px;
+
+text-decoration:none;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+header{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+nav{
+
+flex-wrap:wrap;
+justify-content:center;
+
+}
+
+.productos{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
