@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Producto | Koolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="img/koolo_logo.png" alt="Koolo">
+</div>
+
+<nav>
+
+<a href="index.html">Inicio</a>
+<a href="login.html">Login</a>
+<a href="admin.html">Admin</a>
+
+</nav>
+
+</header>
+
+<main class="productoPagina">
+
+<img id="imagenProducto">
+
+<div class="infoProducto">
+
+<h1 id="nombreProducto"></h1>
+
+<p id="precioProducto"></p>
+
+<p id="descripcionProducto"></p>
+
+<button onclick="agregarCarrito()">Añadir al carrito</button>
+
+</div>
+
+</main>
+
+<footer>
+
+<p>© 2026 Koolo</p>
+
+</footer>
+
+<script src="product.js"></script>
+
+</body>
+</html>
