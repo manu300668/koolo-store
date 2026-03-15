@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin | Koolo</title>
+
+<link rel="stylesheet" href="admin.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+</head>
+
+<body>
+
+<h1>Panel Admin Koolo</h1>
+
+<section>
+
+<h2>Ventas totales</h2>
+
+<p id="ventasTotal">0 €</p>
+
+</section>
+
+
+<section>
+
+<h2>Pedidos</h2>
+
+<div id="listaPedidos"></div>
+
+</section>
+
+
+<section>
+
+<h2>Productos</h2>
+
+<div id="listaProductos"></div>
+
+</section>
+
+
+<section>
+
+<h2>Añadir producto</h2>
+
+<input id="nombre" placeholder="Nombre">
+
+<input id="precio" placeholder="Precio">
+
+<input id="imagen" placeholder="Imagen URL">
+
+<textarea id="descripcion" placeholder="Descripción"></textarea>
+
+<button onclick="agregarProducto()">Crear producto</button>
+
+</section>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
