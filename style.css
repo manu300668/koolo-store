@@ -429,3 +429,115 @@ padding:20px;
 }
 
 }
+/* CHECKOUT */
+
+.checkoutContainer{
+
+padding:40px;
+
+max-width:800px;
+
+margin:auto;
+
+}
+
+
+/* CAJA CHECKOUT */
+
+.checkoutBox{
+
+background:white;
+
+padding:30px;
+
+border-radius:10px;
+
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+
+}
+
+
+/* INPUTS */
+
+.checkoutBox input{
+
+width:100%;
+
+padding:12px;
+
+margin-bottom:15px;
+
+border:1px solid #ccc;
+
+border-radius:5px;
+
+}
+
+
+/* RESUMEN */
+
+.itemResumen{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:10px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+/* BIZUM */
+
+.bizumBox{
+
+margin-top:30px;
+
+padding:20px;
+
+background:#f5f5f5;
+
+border-radius:8px;
+
+text-align:center;
+
+}
+
+
+.bizumBox h3{
+
+font-size:28px;
+
+margin:15px 0;
+
+}
+
+
+.bizumBox button{
+
+margin-top:20px;
+
+padding:14px 20px;
+
+background:black;
+
+color:white;
+
+border:none;
+
+cursor:pointer;
+
+font-size:16px;
+
+border-radius:5px;
+
+}
+
+
+.bizumBox button:hover{
+
+background:#333;
+
+}
