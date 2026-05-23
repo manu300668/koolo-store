@@ -5,9 +5,9 @@ const firebaseConfig = {
 apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
 authDomain: "koolo.es.firebaseapp.com",
 projectId: "koolo2026",
-storageBucket: "TU_PROYECTO.appspot.com",
-messagingSenderId: "XXXX",
-appId: "XXXX"
+storageBucket: "koolo2026.appspot.com",
+messagingSenderId: "612039099714",
+appId: "1:612039099714:web:38d14c2d43851c22574db"
 
 };
 
