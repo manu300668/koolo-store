@@ -2,10 +2,10 @@
 const firebaseConfig = {
   // apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
   authDomain: "koolo.es",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_BUCKET",
-  messagingSenderId: "TU_ID",
-  appId: "TU_APP_ID"
+  projectId: "koolo2026",
+  storageBucket: "koolo2026",
+  messagingSenderId: "612039099714",
+  appId: "1:612039099714:web:38d14c2d43851c225c74db"
 };
 
 firebase.initializeApp(firebaseConfig);
