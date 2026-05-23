@@ -4,15 +4,15 @@ const firebaseConfig = {
 
 apiKey: "TU_API_KEY",
 
-authDomain: "TU_PROYECTO.firebaseapp.com",
+authDomain: "koolo.es.firebaseapp.com",
 
-projectId: "TU_PROYECTO",
+projectId: "koolo2026",
 
-storageBucket: "TU_PROYECTO.appspot.com",
+storageBucket: "koolo2026.appspot.com",
 
-messagingSenderId: "XXXX",
+messagingSenderId: "612039099714",
 
-appId: "XXXX"
+appId: ""1:612039099714:web:38d14c2de43851c225c74db
 
 };
 
