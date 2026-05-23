@@ -2,7 +2,7 @@
 
 const firebaseConfig = {
 
-apiKey: "TU_API_KEY",
+apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
 
 authDomain: "koolo.es.firebaseapp.com",
 
