@@ -4,7 +4,7 @@ const firebaseConfig = {
 
 apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
 
-authDomain: "koolo.es.firebaseapp.com",
+authDomain: "koolo2026.firebaseapp.com",
 
 projectId: "koolo2026",
 
