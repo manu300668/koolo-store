@@ -1,7 +1,7 @@
 // Firebase config
 const firebaseConfig = {
   // apiKey: "AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
-  authDomain: "koolo.es",
+  authDomain: "koolo2026.firebaseapp.com",
   projectId: "koolo2026",
   storageBucket: "koolo2026",
   messagingSenderId: "612039099714",
