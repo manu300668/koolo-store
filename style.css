@@ -539,6 +539,8 @@ border-radius:5px;
 .bizumBox button:hover{
 
 background:#333;
+
+}
 /* PANEL CARRITO */
 
 .carritoPanel{
@@ -651,5 +653,4 @@ padding:50px 20px;
 color:white;
 text-decoration:none;
 
-}
 }
