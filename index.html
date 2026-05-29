@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Koolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo-container">
+
+        <a href="index.html">
+
+            <img
+                src="img/koolo_logo.png"
+                alt="Koolo Logo"
+                class="logo"
+            >
+
+        </a>
+
+    </div>
+
+    <nav class="menu">
+
+        <a href="index.html">Inicio</a>
+        <a href="login.html">Login</a>
+        <a href="admin.html">Admin</a>
+
+    </nav>
+
+    <button
+        class="cart-button"
+        onclick="abrirCarrito()"
+    >
+
+        🛒 Carrito
+        (<span id="contadorCarrito">0</span>)
+
+    </button>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+
+            Streetwear Premium
+
+        </h1>
+
+        <p>
+
+            Ropa urbana exclusiva.
+            Calidad, estilo y actitud.
+
+        </p>
+
+        <button
+            class="hero-btn"
+            onclick="window.scrollTo({
+            top:700,
+            behavior:'smooth'
+            })"
+        >
+
+            Ver colección
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTOS -->
+
+<main>
+
+<section
+id="productosContainer"
+class="productos"
+>
+
+<h2>
+
+Cargando productos...
+
+</h2>
+
+</section>
+
+</main>
+
+
+<!-- PANEL CARRITO -->
+
+<div
+id="carritoPanel"
+class="carritoPanel oculto"
+>
+
+<div class="carrito-header">
+
+<h2>
+
+Tu carrito
+
+</h2>
+
+<button
+class="cerrar-carrito"
+onclick="cerrarCarrito()"
+>
+
+✕
+
+</button>
+
+</div>
+
+<div id="listaCarrito">
+
+<p>
+
+El carrito está vacío
+
+</p>
+
+</div>
+
+<div class="carrito-footer">
+
+<p class="total">
+
+Total:
+
+<span id="totalCarrito">
+
+0
+
+</span>
+
+€
+
+</p>
+
+<button
+class="vaciar-btn"
+onclick="vaciarCarrito()"
+>
+
+Vaciar carrito
+
+</button>
+
+<button
+class="checkout-btn"
+onclick="window.location.href='checkout.html'"
+>
+
+Ir a pagar
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-links">
+
+<a href="#">
+
+Instagram
+
+</a>
+
+<a href="#">
+
+TikTok
+
+</a>
+
+<a href="#">
+
+Facebook
+
+</a>
+
+</div>
+
+<p>
+
+© 2026 Koolo
+
+</p>
+
+</footer>
+
+
+<!-- SCRIPT -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
