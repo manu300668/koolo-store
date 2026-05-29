@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Koolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#f5f5f5;
+font-family:Arial,sans-serif;
+}
+
+.checkout-container{
+max-width:900px;
+margin:50px auto;
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+.checkout-title{
+font-size:42px;
+margin-bottom:30px;
+text-align:center;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+}
+
+.checkout-productos{
+background:#fafafa;
+padding:25px;
+border-radius:20px;
+}
+
+.checkout-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 0;
+border-bottom:1px solid #ddd;
+}
+
+.checkout-item h3{
+font-size:20px;
+margin-bottom:8px;
+}
+
+.checkout-item p{
+font-size:18px;
+}
+
+.checkout-resumen{
+background:black;
+color:white;
+padding:30px;
+border-radius:20px;
+height:fit-content;
+}
+
+.checkout-resumen h2{
+font-size:28px;
+margin-bottom:25px;
+}
+
+.checkout-total{
+font-size:34px;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.bizum-box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+.bizum-box p{
+margin-bottom:10px;
+font-size:18px;
+line-height:1.5;
+}
+
+.numero-bizum{
+font-size:30px;
+font-weight:bold;
+margin-top:10px;
+}
+
+.mensaje-box{
+background:#222;
+padding:18px;
+border-radius:18px;
+font-size:16px;
+line-height:1.5;
+margin-bottom:20px;
+word-break:break-word;
+}
+
+.btn-pagar,
+.btn-copiar{
+width:100%;
+padding:18px;
+border:none;
+border-radius:16px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:15px;
+transition:.3s;
+}
+
+.btn-pagar{
+background:white;
+color:black;
+}
+
+.btn-copiar{
+background:#444;
+color:white;
+}
+
+.btn-pagar:hover,
+.btn-copiar:hover{
+transform:translateY(-2px);
+}
+
+.volver{
+display:block;
+margin-top:20px;
+text-align:center;
+text-decoration:none;
+color:white;
+font-size:18px;
+}
+
+@media(max-width:768px){
+
+.checkout-grid{
+grid-template-columns:1fr;
+}
+
+.checkout-title{
+font-size:32px;
+}
+
+.checkout-container{
+margin:20px;
+padding:25px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="checkout-container">
+
+<h1 class="checkout-title">
+
+Finalizar pedido
+
+</h1>
+
+<div class="checkout-grid">
+
+<!-- PRODUCTOS -->
+
+<div class="checkout-productos">
+
+<h2>
+
+Tu pedido
+
+</h2>
+
+<div id="checkoutLista">
+
+<p>
+
+Cargando carrito...
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- RESUMEN -->
+
+<div class="checkout-resumen">
+
+<h2>
+
+Pago Bizum
+
+</h2>
+
+<p>
+
+Realiza el pago al siguiente número:
+
+</p>
+
+<div class="bizum-box">
+
+<div class="numero-bizum">
+
++34 654 056 391
+
+</div>
+
+</div>
+
+<p>
+
+Total del pedido:
+
+</p>
+
+<div
+class="checkout-total"
+id="checkoutTotal"
+>
+
+0 €
+
+</div>
+
+<p>
+
+Mensaje para Bizum:
+
+</p>
+
+<div
+class="mensaje-box"
+id="mensajeBizum"
+>
+
+Cargando...
+
+</div>
+
+<button
+class="btn-copiar"
+onclick="copiarMensaje()"
+>
+
+Copiar mensaje
+
+</button>
+
+<button
+class="btn-pagar"
+onclick="confirmarPedido()"
+>
+
+He realizado el pago
+
+</button>
+
+<a
+href="index.html"
+class="volver"
+>
+
+← Volver a la tienda
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let carrito =
+JSON.parse(
+localStorage.getItem("carrito")
+) || [];
+
+const lista =
+document.getElementById(
+"checkoutLista"
+);
+
+const totalElement =
+document.getElementById(
+"checkoutTotal"
+);
+
+const mensajeElement =
+document.getElementById(
+"mensajeBizum"
+);
+
+function cargarCheckout(){
+
+if(carrito.length === 0){
+
+lista.innerHTML = `
+
+<p>
+
+No hay productos
+en el carrito
+
+</p>
+
+`;
+
+return;
+
+}
+
+lista.innerHTML = "";
+
+let total = 0;
+
+carrito.forEach(producto=>{
+
+total += Number(producto.precio);
+
+lista.innerHTML += `
+
+<div class="checkout-item">
+
+<div>
+
+<h3>
+
+${producto.nombre}
+
+</h3>
+
+<p>
+
+${producto.precio} €
+
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+total =
+total.toFixed(2);
+
+totalElement.textContent =
+`${total} €`;
+
+mensajeElement.textContent =
+`Pedido KOolo - Total ${total} €`;
+
+}
+
+function copiarMensaje(){
+
+navigator.clipboard.writeText(
+mensajeElement.textContent
+);
+
+alert(
+"Mensaje copiado"
+);
+
+}
+
+function confirmarPedido(){
+
+alert(
+"Pedido confirmado. Gracias por comprar en KOolo."
+);
+
+localStorage.removeItem(
+"carrito"
+);
+
+window.location.href =
+"index.html?v=pedido";
+
+}
+
+cargarCheckout();
+
+</script>
+
+</body>
+</html>
