@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login | Koolo</title>
+
+<link rel="stylesheet"
+href="admin.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h1>
+
+Admin Koolo
+
+</h1>
+
+<p>
+
+Inicia sesión
+
+</p>
+
+<input
+type="email"
+id="email"
+placeholder="Correo"
+>
+
+<input
+type="password"
+id="password"
+placeholder="Contraseña"
+>
+
+<button onclick="login()">
+
+Entrar
+
+</button>
+
+<p id="error"></p>
+
+</div>
+
+<script>
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+
+authDomain:
+"koolo2026.firebaseapp.com",
+
+projectId:
+"koolo2026",
+
+storageBucket:
+"koolo2026.appspot.com",
+
+messagingSenderId:
+"612039099714",
+
+appId:
+"1:612039099714:web:38d14c2de43851c225c74db"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+function login(){
+
+const email =
+document.getElementById(
+"email"
+).value.trim();
+
+const password =
+document.getElementById(
+"password"
+).value.trim();
+
+firebase.auth()
+.signInWithEmailAndPassword(
+email,
+password
+)
+
+.then(()=>{
+
+window.location.href =
+"admin.html";
+
+})
+
+.catch(error=>{
+
+document.getElementById(
+"error"
+).textContent =
+error.message;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>
