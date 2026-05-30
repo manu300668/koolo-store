@@ -3,8 +3,6 @@
 // ==========================
 
 const firebaseConfig = {
-
-let pedidosAnteriores = 0;
   
 apiKey:"AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
 authDomain:"koolo2026.firebaseapp.com",
