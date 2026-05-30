@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Koolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+
+.checkout-container{
+max-width:1200px;
+margin:40px auto;
+padding:20px;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:30px;
+}
+
+.checkout-card{
+background:white;
+border-radius:25px;
+padding:30px;
+box-shadow:0 5px 25px rgba(0,0,0,.08);
+}
+
+.checkout-card h2{
+margin-bottom:20px;
+}
+
+.form-group{
+margin-bottom:18px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:14px;
+font-size:16px;
+}
+
+.checkout-item{
+display:flex;
+justify-content:space-between;
+padding:15px 0;
+border-bottom:1px solid #eee;
+}
+
+.checkout-total{
+font-size:32px;
+font-weight:bold;
+margin-top:25px;
+}
+
+.btn-pagar{
+width:100%;
+padding:20px;
+border:none;
+border-radius:16px;
+background:black;
+color:white;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+margin-top:25px;
+}
+
+.confirmacion{
+display:none;
+text-align:center;
+padding:60px 20px;
+}
+
+.confirmacion h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.codigo-pedido{
+font-size:32px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.bizum-oculto{
+font-size:28px;
+font-weight:bold;
+margin:20px 0;
+}
+
+@media(max-width:768px){
+
+.checkout-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="checkout-container" id="checkoutApp">
+
+<div class="checkout-grid">
+
+<!-- FORMULARIO -->
+
+<div class="checkout-card">
+
+<h2>Datos de envío</h2>
+
+<div class="form-group">
+<label>Nombre completo</label>
+<input id="nombre" type="text">
+</div>
+
+<div class="form-group">
+<label>Teléfono</label>
+<input id="telefono" type="tel">
+</div>
+
+<div class="form-group">
+<label>Dirección</label>
+<input id="direccion" type="text">
+</div>
+
+<div class="form-group">
+<label>Ciudad</label>
+<input id="ciudad" type="text">
+</div>
+
+<div class="form-group">
+<label>Código Postal</label>
+<input id="cp" type="text">
+</div>
+
+<div class="form-group">
+<label>Observaciones</label>
+<textarea id="observaciones"></textarea>
+</div>
+
+</div>
+
+<!-- RESUMEN -->
+
+<div class="checkout-card">
+
+<h2>Tu pedido</h2>
+
+<div id="listaPedido"></div>
+
+<div class="checkout-total">
+
+Total:
+<span id="totalPedido">0</span> €
+
+</div>
+
+<button
+class="btn-pagar"
+onclick="guardarPedido()"
+>
+
+Pagar
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CONFIRMACIÓN -->
+
+<div class="confirmacion" id="confirmacion">
+
+<h1>Pedido recibido</h1>
+
+<p>Tu pedido está reservado durante 30 minutos.</p>
+
+<p>Estado:</p>
+
+<h2>PENDIENTE</h2>
+
+<p>Referencia:</p>
+
+<div
+class="codigo-pedido"
+id="codigoPedido"
+></div>
+
+<p>
+
+Realiza el Bizum a:
+
+</p>
+
+<div class="bizum-oculto">
+
++34 6•• ••• •91
+
+</div>
+
+<p>
+
+Una vez recibido el pago,
+prepararemos tu pedido.
+
+</p>
+
+<button
+class="btn-pagar"
+onclick="volverInicio()"
+>
+
+Volver a la tienda
+
+</button>
+
+</div>
+
+<script>
+
+// FIREBASE
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyA7orSwoJ5XcDd-ABRj_o_OVySCdC05mxE",
+authDomain:"koolo2026.firebaseapp.com",
+projectId:"koolo2026",
+storageBucket:"koolo2026.appspot.com",
+messagingSenderId:"612039099714",
+appId:"1:612039099714:web:38d14c2de43851c225c74db"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+
+
+// CARRITO
+
+let carrito =
+JSON.parse(
+localStorage.getItem("carrito")
+) || [];
+
+const listaPedido =
+document.getElementById(
+"listaPedido"
+);
+
+const totalPedido =
+document.getElementById(
+"totalPedido"
+);
+
+let total = 0;
+
+
+// RENDER
+
+function renderPedido(){
+
+listaPedido.innerHTML = "";
+
+total = 0;
+
+carrito.forEach(item=>{
+
+total += Number(item.precio);
+
+listaPedido.innerHTML += `
+
+<div class="checkout-item">
+
+<div>
+
+<strong>
+
+${item.nombre}
+
+</strong>
+
+</div>
+
+<div>
+
+${item.precio} €
+
+</div>
+
+</div>
+
+`;
+
+});
+
+totalPedido.textContent =
+total.toFixed(2);
+
+}
+
+renderPedido();
+
+
+// GUARDAR PEDIDO
+
+async function guardarPedido(){
+
+const nombre =
+document.getElementById(
+"nombre"
+).value.trim();
+
+const telefono =
+document.getElementById(
+"telefono"
+).value.trim();
+
+const direccion =
+document.getElementById(
+"direccion"
+).value.trim();
+
+const ciudad =
+document.getElementById(
+"ciudad"
+).value.trim();
+
+const cp =
+document.getElementById(
+"cp"
+).value.trim();
+
+const observaciones =
+document.getElementById(
+"observaciones"
+).value.trim();
+
+if(
+!nombre ||
+!telefono ||
+!direccion ||
+!ciudad ||
+!cp
+){
+
+alert(
+"Completa todos los campos obligatorios"
+);
+
+return;
+
+}
+
+const ahora =
+new Date();
+
+const expira =
+new Date(
+ahora.getTime()
++ 30*60*1000
+);
+
+const referencia =
+"KO-" +
+Math.floor(
+10000 +
+Math.random()*90000
+);
+
+try{
+
+await db.collection(
+"pedidos"
+).add({
+
+nombre,
+telefono,
+direccion,
+ciudad,
+codigoPostal:cp,
+observaciones,
+
+productos:carrito,
+
+total,
+
+estado:"pendiente",
+
+fechaCreacion:
+firebase.firestore.Timestamp
+.fromDate(ahora),
+
+expiraEn:
+firebase.firestore.Timestamp
+.fromDate(expira),
+
+referenciaPedido:
+referencia
+
+});
+
+localStorage.removeItem(
+"carrito"
+);
+
+document.getElementById(
+"checkoutApp"
+).style.display =
+"none";
+
+document.getElementById(
+"confirmacion"
+).style.display =
+"block";
+
+document.getElementById(
+"codigoPedido"
+).textContent =
+referencia;
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Error guardando pedido"
+);
+
+}
+
+}
+
+function volverInicio(){
+
+window.location.href =
+"index.html?v=pedido";
+
+}
+
+</script>
+
+</body>
+  </html>
