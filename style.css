@@ -280,6 +280,15 @@ color:white;
 
 /* FOOTER */
 
+.footer-contacto{
+margin-top:20px;
+margin-bottom:50px;
+}
+
+footer p:last-child{
+margin-top:35px;
+}
+
 .footer{
 background:black;
 color:white;
@@ -301,7 +310,6 @@ color:white;
 text-decoration:none;
 font-size:18px;
 }
-
 
 /* RESPONSIVE */
 
