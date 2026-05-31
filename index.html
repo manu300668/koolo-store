@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KOolo Store</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🛒 KOolo Store</h1>
+
+</header>
+
+<main>
+
+<!-- PRODUCTOS -->
+<section>
+
+<h2>Productos</h2>
+
+<div id="productosContainer"></div>
+
+</section>
+
+
+<!-- CARRITO -->
+<section>
+
+<h2>Carrito</h2>
+
+<div id="carritoContainer"></div>
+
+<h3>
+Total:
+<span id="totalCarrito">0.00 €</span>
+</h3>
+
+<button onclick="irCheckout()" class="btn">
+Ir a pagar
+</button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>Contacto: eumanu@msn.com</p>
+
+<p>© KOolo 2026</p>
+
+</footer>
+
+
+<!-- SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+
+</html>
