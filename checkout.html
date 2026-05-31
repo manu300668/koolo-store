@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout KOolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Finalizar pedido</h1>
+
+</header>
+
+
+<main class="checkout-container">
+
+<!-- RESUMEN PEDIDO -->
+
+<section class="checkout-card">
+
+<h2>Tu pedido</h2>
+
+<div id="checkoutCarrito"></div>
+
+<h3>
+Total:
+<span id="checkoutTotal">
+0.00 €
+</span>
+</h3>
+
+</section>
+
+
+<!-- DATOS CLIENTE -->
+
+<section class="checkout-card">
+
+<h2>Dirección de envío</h2>
+
+<form id="checkoutForm">
+
+<label>
+Nombre completo
+</label>
+
+<input
+type="text"
+id="nombre"
+placeholder="Tu nombre"
+required
+>
+
+<label>
+Teléfono
+</label>
+
+<input
+type="tel"
+id="telefono"
+placeholder="Tu teléfono"
+required
+>
+
+<label>
+Dirección
+</label>
+
+<input
+type="text"
+id="direccion"
+placeholder="Calle y número"
+required
+>
+
+<label>
+Ciudad
+</label>
+
+<input
+type="text"
+id="ciudad"
+placeholder="Ciudad"
+required
+>
+
+<label>
+Código postal
+</label>
+
+<input
+type="text"
+id="codigoPostal"
+placeholder="Código postal"
+required
+>
+
+<label>
+Email contacto (opcional)
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="correo@email.com"
+>
+
+<button
+type="button"
+onclick="crearPedido()"
+class="btn-pagar"
+>
+
+Pagar
+
+</button>
+
+</form>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<p>Contacto:</p>
+
+<p>
+koolo.es@gmail.com
+</p>
+
+<p>
+© KOolo 2026
+</p>
+
+</footer>
+
+
+<!-- FIREBASE -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+
+<!-- CHECKOUT JS -->
+
+<script src="checkout.js"></script>
+
+</body>
+
+</html>
