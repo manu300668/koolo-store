@@ -119,10 +119,20 @@ document.getElementById("cartCount");
 
 if(cartCount){
 
-let totalItems = 0;
+let total = 0;
 
-carrito.forEach(item=>{
-totalItems += item.cantidad;
+carrito.forEach((item,index)=>{
+
+const precio =
+Number(item.precio) || 0;
+
+const cantidad =
+Number(item.cantidad) || 0;
+
+const subtotal =
+precio * cantidad;
+
+total += subtotal;
 });
 
 cartCount.innerText =
