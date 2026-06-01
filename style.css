@@ -344,3 +344,55 @@ height:220px;
 }
 
 }
+/* ==========================
+FOOTER PRO
+========================== */
+
+.footer{
+text-align:center;
+padding:50px 20px;
+background:#111;
+color:white;
+margin-top:50px;
+}
+
+.socials{
+margin-bottom:25px;
+}
+
+.instagram-link{
+display:inline-flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+color:white;
+font-size:1.2rem;
+font-weight:600;
+transition:.2s;
+}
+
+.instagram-link:hover{
+transform:translateY(-2px);
+opacity:.85;
+}
+
+.footer-contacto{
+margin-top:20px;
+font-size:1.1rem;
+}
+
+.footer-contacto a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.footer-contacto a:hover{
+text-decoration:underline;
+}
+
+.footer-copy{
+margin-top:25px;
+opacity:.8;
+font-size:1rem;
+}
