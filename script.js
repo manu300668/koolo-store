@@ -114,7 +114,20 @@ cantidad:1
 });
 
 }
+const cartCount =
+document.getElementById("cartCount");
 
+if(cartCount){
+
+let totalItems = 0;
+
+carrito.forEach(item=>{
+totalItems += item.cantidad;
+});
+
+cartCount.innerText =
+totalItems;
+}
 guardarCarrito();
 renderCarrito();
 
