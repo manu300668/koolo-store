@@ -14,11 +14,21 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-</head>
+<header class="header">
 
-<body>
+<h1>Koolo</h1>
 
-<header>
+<div class="cart-header" onclick="irCheckout()">
+
+🛒
+
+<span id="cartCount">
+0
+</span>
+
+</div>
+
+</header>
 
 <h1>🛒 Koolo </h1>
 
@@ -32,27 +42,6 @@
 <h2>Productos</h2>
 
 <div id="productosContainer"></div>
-
-</section>
-
-
-<!-- CARRITO -->
-<section>
-
-<h2>Carrito</h2>
-
-<div id="carritoContainer"></div>
-
-<h3>
-Total:
-<span id="totalCarrito">0.00 €</span>
-</h3>
-
-<button onclick="irCheckout()" class="btn">
-Ir a pagar
-</button>
-
-</section>
 
 </main>
 
