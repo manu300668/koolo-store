@@ -403,4 +403,66 @@ width:100%;
 height:220px;
 }
 
-  }
+  /* ==========================
+LOGO PRO LIMPIO (CORREGIDO)
+========================== */
+
+.logo-pro{
+font-size:2.6rem;
+font-weight:900;
+letter-spacing:3px;
+color:white;
+text-transform:uppercase;
+cursor:pointer;
+position:relative;
+display:inline-block;
+transition:.3s;
+}
+
+/* GRADIENTE SUAVE */
+
+.logo-pro{
+background: linear-gradient(
+90deg,
+#ffffff,
+#ff2d55,
+#00e5ff,
+#ffffff
+);
+
+background-size:300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:shine 6s infinite linear;
+}
+
+/* ANIMACIÓN */
+
+@keyframes shine{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:300%;
+}
+
+}
+
+/* HOVER SIMPLE */
+
+.logo-pro:hover{
+transform:scale(1.05);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.logo-pro{
+font-size:2rem;
+letter-spacing:2px;
+}
+
+}
