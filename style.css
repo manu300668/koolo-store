@@ -1,0 +1,406 @@
+/* ==========================
+RESET
+========================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+color:#222;
+line-height:1.5;
+}
+
+
+/* ==========================
+HEADER
+========================== */
+
+.header{
+background:#111;
+color:white;
+padding:18px 24px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:999;
+box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+.logo{
+font-size:2rem;
+font-weight:bold;
+}
+
+
+/* ==========================
+CARRITO HEADER
+========================== */
+
+.cart-header{
+position:relative;
+cursor:pointer;
+transition:.2s;
+}
+
+.cart-header:hover{
+transform:scale(1.08);
+}
+
+.cart-icon{
+font-size:2rem;
+}
+
+.cart-badge{
+position:absolute;
+top:-10px;
+right:-12px;
+background:#ff2d55;
+color:white;
+font-size:.8rem;
+font-weight:bold;
+padding:5px 10px;
+border-radius:999px;
+min-width:26px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+
+/* ==========================
+MAIN
+========================== */
+
+main{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+.productos-section h2{
+font-size:2rem;
+margin-bottom:25px;
+}
+
+
+/* ==========================
+GRID PRODUCTOS
+========================== */
+
+.productos-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fill,minmax(240px,1fr));
+gap:25px;
+}
+
+
+/* ==========================
+CARD PRODUCTO
+========================== */
+
+.producto{
+background:white;
+border-radius:24px;
+padding:18px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+transition:.25s;
+text-align:center;
+overflow:hidden;
+}
+
+.producto:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.producto img{
+width:100%;
+height:240px;
+object-fit:cover;
+border-radius:18px;
+margin-bottom:15px;
+}
+
+.producto h3{
+font-size:1.2rem;
+margin-bottom:8px;
+}
+
+.producto p{
+margin:8px 0;
+font-size:1rem;
+}
+
+.precio{
+font-size:1.3rem;
+font-weight:bold;
+}
+
+
+/* ==========================
+BOTÓN COMPRAR
+========================== */
+
+.producto button{
+width:100%;
+background:#111;
+color:white;
+border:none;
+padding:14px;
+border-radius:16px;
+font-size:1rem;
+cursor:pointer;
+margin-top:12px;
+transition:.2s;
+}
+
+.producto button:hover{
+transform:translateY(-2px);
+}
+
+
+/* ==========================
+TOAST CARRITO
+========================== */
+
+.toast-cart{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+background:#111;
+color:white;
+padding:16px 28px;
+border-radius:18px;
+font-size:1rem;
+font-weight:600;
+z-index:9999;
+animation:fadeUp .25s ease;
+box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:
+translateX(-50%)
+translateY(20px);
+}
+
+to{
+opacity:1;
+transform:
+translateX(-50%)
+translateY(0);
+}
+
+}
+
+
+/* ==========================
+ANIMACIÓN CARRITO
+========================== */
+
+.bump{
+animation:bump .25s ease;
+}
+
+@keyframes bump{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.2);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+
+/* ==========================
+CHECKOUT
+========================== */
+
+.checkout-container{
+max-width:900px;
+margin:auto;
+padding:25px;
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+.checkout-card{
+background:white;
+border-radius:30px;
+padding:35px;
+box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.checkout-card h2{
+font-size:2rem;
+margin-bottom:25px;
+}
+
+.checkout-item{
+display:flex;
+align-items:center;
+gap:15px;
+padding:15px 0;
+border-bottom:1px solid #eee;
+}
+
+.checkout-item img{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:16px;
+}
+
+.checkout-card label{
+display:block;
+font-size:1rem;
+font-weight:600;
+margin-top:18px;
+margin-bottom:8px;
+}
+
+.checkout-card input{
+width:100%;
+padding:16px;
+border:1px solid #ddd;
+border-radius:14px;
+font-size:1rem;
+outline:none;
+}
+
+.checkout-card input:focus{
+border-color:#111;
+}
+
+.btn-pagar{
+width:100%;
+margin-top:30px;
+background:#111;
+color:white;
+border:none;
+padding:18px;
+border-radius:18px;
+font-size:1.2rem;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn-pagar:hover{
+transform:translateY(-2px);
+}
+
+#checkoutTotal{
+font-size:2rem;
+font-weight:bold;
+}
+
+
+/* ==========================
+FOOTER
+========================== */
+
+.footer{
+text-align:center;
+padding:50px 20px;
+background:#111;
+color:white;
+margin-top:50px;
+}
+
+.socials{
+margin-bottom:25px;
+}
+
+.instagram-link{
+display:inline-flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+color:white;
+font-size:1.2rem;
+font-weight:600;
+transition:.2s;
+}
+
+.instagram-link:hover{
+transform:translateY(-2px);
+opacity:.85;
+}
+
+.footer-contacto{
+margin-top:20px;
+font-size:1.1rem;
+}
+
+.footer-contacto a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.footer-contacto a:hover{
+text-decoration:underline;
+}
+
+.footer-copy{
+margin-top:25px;
+opacity:.8;
+}
+
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+.logo{
+font-size:1.7rem;
+}
+
+.cart-icon{
+font-size:1.8rem;
+}
+
+.productos-grid{
+grid-template-columns:1fr;
+}
+
+.producto img{
+height:220px;
+}
+
+.checkout-card{
+padding:25px;
+}
+
+.checkout-item{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.checkout-item img{
+width:100%;
+height:220px;
+}
+
+  }
