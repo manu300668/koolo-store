@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin koolo</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="logo-pro">
+<img src="logo.png" class="logo-img">
+</div>
+
+</header>
+
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="checkout-card">
+
+<h2>Admin Login</h2>
+
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
+
+<button class="btn-pagar" onclick="login()">
+Entrar
+</button>
+
+</div>
+
+
+<!-- PANEL -->
+
+<div id="adminPanel" style="display:none; padding:20px;">
+
+<h2>Productos</h2>
+
+<div id="productosAdmin"></div>
+
+
+<h2>Pedidos</h2>
+
+<div id="pedidosAdmin"></div>
+
+</div>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>
