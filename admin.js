@@ -33,7 +33,7 @@ document.getElementById("pass").value;
 
 // credenciales (puedes cambiarlas)
 
-if(user === "admin" && pass === "1234"){
+if(user === "koolo" && pass === "Manu68."){
 
 document.getElementById("loginBox").style.display = "none";
 
