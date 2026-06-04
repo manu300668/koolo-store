@@ -91,7 +91,62 @@ Eliminar
 
 });
 
+function crearProducto(){
 
+const nombre =
+document.getElementById("nombre").value;
+
+const precio =
+Number(document.getElementById("precio").value);
+
+const stock =
+Number(document.getElementById("stock").value);
+
+const file =
+document.getElementById("imagenFile").files[0];
+
+
+if(!file){
+alert("Selecciona imagen");
+return;
+}
+
+
+// referencia storage
+
+const storageRef =
+firebase.storage().ref(
+"productos/" + file.name
+);
+
+
+// subir imagen
+
+storageRef.put(file).then(()=>{
+
+storageRef.getDownloadURL().then(url=>{
+
+
+// guardar en firestore
+
+db.collection("productos").add({
+
+nombre,
+precio,
+stock,
+imagen: url,
+tallas:["S","M","L","XL"]
+
+});
+
+
+alert("Producto creado");
+
+});
+
+});
+
+}
 // PEDIDOS
 
 db.collection("pedidos").onSnapshot(snap=>{
