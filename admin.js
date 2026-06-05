@@ -92,7 +92,7 @@ Eliminar
 });
 
 function crearProducto(){
-
+function crearProducto(){
 const nombre =
 document.getElementById("nombre").value;
 
