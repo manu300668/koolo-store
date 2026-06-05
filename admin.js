@@ -113,7 +113,7 @@ return;
 
 
 // referencia storage
-
+alert("Llegué a Storage");
 const storageRef =
 firebase.storage().ref(
 "productos/" + file.name
@@ -123,14 +123,14 @@ firebase.storage().ref(
 // subir imagen
 
 storageRef.put(file).then(()=>{
-
+alert("Imagen subida");
 storageRef.getDownloadURL().then(url=>{
 
 
 // guardar en firestore
 
 db.collection("productos").add({
-
+alert("Guardando en Firestore");
 nombre,
 precio,
 stock,
