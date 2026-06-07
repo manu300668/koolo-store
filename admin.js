@@ -159,43 +159,47 @@ firebase.storage().ref(
 
 alert("4 - storage OK");
 
-storageRef.put(file)
-.then(()=>{
-alert("5 - imagen subida");
+const uploadTask = storageRef.put(file);
 
-return storageRef.getDownloadURL();
-})
+uploadTask.on(
+"state_changed",
+
+(snapshot)=>{
+
+// progreso (opcional)
+
+},
+
+(error)=>{
+
+alert("ERROR subida: " + error.message);
+
+},
+
+()=>{
+
+uploadTask.snapshot.ref.getDownloadURL()
 .then((url)=>{
 
-alert("6 - URL OK");
+alert("5 - imagen subida");
 
-return db.collection("productos").add({
+db.collection("productos").add({
 nombre,
 precio,
 stock,
 imagen:url,
 tallas:["S","M","L","XL"]
-});
-
 })
 .then(()=>{
 
 alert("7 - producto creado");
 
-})
-.catch((error)=>{
-
-alert("ERROR: " + error.message);
+});
 
 });
 
-}catch(e){
-
-alert("FALLO GRAVE: " + e.message);
-
 }
-
-}
+);
 
 // ==========================
 // BORRAR PRODUCTO
