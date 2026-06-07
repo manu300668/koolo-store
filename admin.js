@@ -127,7 +127,7 @@ snap.forEach((doc)=>{
 
 function crearProducto(){
 
-alert("crearProducto ejecutada");
+alert("1 - OK función");
 
 const nombre =
 document.getElementById("nombre").value;
@@ -141,51 +141,59 @@ Number(document.getElementById("stock").value);
 const file =
 document.getElementById("imagenFile").files[0];
 
+alert("2 - datos leídos");
+
 if(!file){
 alert("No hay imagen");
 return;
 }
 
-if(!firebase.storage){
-alert("Firebase Storage NO está cargado");
-return;
-}
+alert("3 - antes de storage");
+
+try{
 
 const storageRef =
 firebase.storage().ref(
 "productos/" + Date.now() + "_" + file.name
 );
 
+alert("4 - storage OK");
+
 storageRef.put(file)
 .then(()=>{
-alert("Imagen subida");
+alert("5 - imagen subida");
 
 return storageRef.getDownloadURL();
 })
 .then((url)=>{
 
+alert("6 - URL OK");
+
 return db.collection("productos").add({
 nombre,
 precio,
 stock,
-imagen: url,
+imagen:url,
 tallas:["S","M","L","XL"]
 });
 
 })
 .then(()=>{
-alert("Producto creado correctamente");
 
-document.getElementById("nombre").value = "";
-document.getElementById("precio").value = "";
-document.getElementById("stock").value = "";
-document.getElementById("imagenFile").value = "";
+alert("7 - producto creado");
 
 })
 .catch((error)=>{
-console.error(error);
+
 alert("ERROR: " + error.message);
+
 });
+
+}catch(e){
+
+alert("FALLO GRAVE: " + e.message);
+
+}
 
 }
 
