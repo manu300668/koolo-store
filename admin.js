@@ -126,7 +126,7 @@ snap.forEach((doc)=>{
 // ==========================
 
 function crearProducto(){
-
+alert("crearProducto ejecutada");
 const nombre =
 document.getElementById("nombre").value;
 
