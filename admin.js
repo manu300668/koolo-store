@@ -127,91 +127,46 @@ snap.forEach((doc)=>{
 
 function crearProducto(){
 
-alert("1 - OK función");
+alert("START");
 
-const nombre =
-document.getElementById("nombre").value;
-
-const precio =
-Number(document.getElementById("precio").value);
-
-const stock =
-Number(document.getElementById("stock").value);
-
-const file =
-document.getElementById("imagenFile").files[0];
-
-alert("2 - datos leídos");
+const nombre = document.getElementById("nombre").value;
+const precio = Number(document.getElementById("precio").value);
+const stock = Number(document.getElementById("stock").value);
+const file = document.getElementById("imagenFile").files[0];
 
 if(!file){
-alert("No hay imagen");
+alert("NO FILE");
 return;
 }
 
-alert("3 - antes de storage");
-
-try{
+alert("ANTES STORAGE");
 
 const storageRef =
-firebase.storage().ref(
-"productos/" + Date.now() + "_" + file.name
-);
+firebase.storage().ref("productos/" + Date.now() + "_" + file.name);
 
-alert("4 - storage OK");
-
-const uploadTask = storageRef.put(file);
-
-  uploadTask.on(
-"state_changed",
-
-(snapshot)=>{
-
-// progreso opcional
-
-},
-
-(error)=>{
-
-alert("ERROR subida: " + error.message);
-
-},
-
-()=>{
-
-uploadTask.snapshot.ref.getDownloadURL()
+storageRef.put(file)
+.then(()=>{
+alert("UPLOAD OK");
+return storageRef.getDownloadURL();
+})
 .then((url)=>{
-
-alert("5 - imagen subida");
+alert("URL OK: " + url);
 
 return db.collection("productos").add({
 nombre,
 precio,
 stock,
-imagen: url,
+imagen:url,
 tallas:["S","M","L","XL"]
 });
-
 })
 .then(()=>{
-
-alert("7 - producto creado");
-
+alert("FIRESTORE OK");
 })
-.catch((error)=>{
-
-alert("ERROR Firestore: " + error.message);
-
+.catch((err)=>{
+alert("ERROR FINAL: " + err.message);
+console.error(err);
 });
-
-}
-
-);
-
-}catch(e){
-
-alert("FALLO GRAVE: " + e.message);
-
-}
 
 }
 
