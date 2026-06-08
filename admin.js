@@ -161,12 +161,12 @@ alert("4 - storage OK");
 
 const uploadTask = storageRef.put(file);
 
-uploadTask.on(
+  uploadTask.on(
 "state_changed",
 
 (snapshot)=>{
 
-// progreso (opcional)
+// progreso opcional
 
 },
 
@@ -183,23 +183,37 @@ uploadTask.snapshot.ref.getDownloadURL()
 
 alert("5 - imagen subida");
 
-db.collection("productos").add({
+return db.collection("productos").add({
 nombre,
 precio,
 stock,
-imagen:url,
+imagen: url,
 tallas:["S","M","L","XL"]
+});
+
 })
 .then(()=>{
 
 alert("7 - producto creado");
 
-});
+})
+.catch((error)=>{
+
+alert("ERROR Firestore: " + error.message);
 
 });
 
 }
+
 );
+
+}catch(e){
+
+alert("FALLO GRAVE: " + e.message);
+
+}
+
+}
 
 // ==========================
 // BORRAR PRODUCTO
