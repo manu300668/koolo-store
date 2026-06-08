@@ -29,9 +29,7 @@ document.getElementById("pass").value;
 
 if(user === "koolo" && pass === "Manu68."){
 
-  alert("Login correcto");
-
-  document.getElementById("loginBox").style.display = "none";
+document.getElementById("loginBox").style.display = "none";
 
 document.getElementById("adminPanel").style.display = "block";
 
