@@ -127,61 +127,28 @@ snap.forEach((doc)=>{
 
 function crearProducto(){
 
-const nombre = document.getElementById("nombre").value;
-const precio = Number(document.getElementById("precio").value);
-const stock = Number(document.getElementById("stock").value);
 const file = document.getElementById("imagenFile").files[0];
 
 if(!file){
-alert("Selecciona imagen");
-return;
+  alert("No hay imagen");
+  return;
 }
 
-const storageRef =
-firebase.storage().ref("productos/" + Date.now() + "_" + file.name);
+alert("Archivo: " + file.name);
 
-const uploadTask = storageRef.put(file);
-
-uploadTask.on("state_changed",
-
-(snapshot)=>{
-
-// progreso opcional
-
-},
-
-(error)=>{
-alert("ERROR STORAGE: " + error.message);
-},
-
-()=>{
-
-uploadTask.snapshot.ref.getDownloadURL()
-.then((url)=>{
-
-return db.collection("productos").add({
-nombre,
-precio,
-stock,
-imagen:url,
-tallas:["S","M","L","XL"]
-});
-
-})
+firebase.storage()
+.ref("test/" + file.name)
+.put(file)
 .then(()=>{
-
-alert("PRODUCTO CREADO CON IMAGEN");
-
-document.getElementById("nombre").value = "";
-document.getElementById("precio").value = "";
-document.getElementById("stock").value = "";
-document.getElementById("imagenFile").value = "";
-
+  alert("SUBIDA OK");
+})
+.catch((error)=>{
+  alert(
+    "ERROR\n\n" +
+    "Código: " + error.code +
+    "\n\nMensaje: " + error.message
+  );
 });
-
-}
-
-);
 
 }
 
