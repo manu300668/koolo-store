@@ -125,47 +125,25 @@ snap.forEach((doc)=>{
 // CREAR PRODUCTO
 // ==========================
 
-function crearProducto(){
 
-alert("START");
+function crearProducto(){
 
 const nombre = document.getElementById("nombre").value;
 const precio = Number(document.getElementById("precio").value);
 const stock = Number(document.getElementById("stock").value);
-const file = document.getElementById("imagenFile").files[0];
 
-if(!file){
-alert("NO FILE");
-return;
-}
-
-alert("ANTES STORAGE");
-
-const storageRef =
-firebase.storage().ref("productos/" + Date.now() + "_" + file.name);
-alert(file.name);
-storageRef.put(file)
-.then(()=>{
-alert("UPLOAD OK");
-return storageRef.getDownloadURL();
-})
-.then((url)=>{
-alert("URL OK: " + url);
-
-return db.collection("productos").add({
-nombre,
-precio,
-stock,
-imagen:url,
-tallas:["S","M","L","XL"]
-});
+db.collection("productos").add({
+  nombre,
+  precio,
+  stock,
+  imagen: "",
+  tallas:["S","M","L","XL"]
 })
 .then(()=>{
-alert("FIRESTORE OK");
+  alert("PRODUCTO CREADO");
 })
 .catch((err)=>{
-alert("ERROR FINAL: " + err.message);
-console.error(err);
+  alert("ERROR: " + err.message);
 });
 
 }
