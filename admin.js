@@ -125,25 +125,60 @@ snap.forEach((doc)=>{
 // CREAR PRODUCTO
 // ==========================
 
-
 function crearProducto(){
 
 const nombre = document.getElementById("nombre").value;
 const precio = Number(document.getElementById("precio").value);
 const stock = Number(document.getElementById("stock").value);
+const file = document.getElementById("imagenFile").files[0];
 
-db.collection("productos").add({
-  nombre,
-  precio,
-  stock,
-  imagen: "",
-  tallas:["S","M","L","XL"]
+if(!nombre || !precio || !stock){
+alert("Faltan datos");
+return;
+}
+
+if(!file){
+alert("Selecciona imagen");
+return;
+}
+
+// nombre único para evitar conflictos
+const fileName = "productos/" + Date.now() + "_" + file.name;
+
+const storageRef = firebase.storage().ref().child(fileName);
+
+storageRef.put(file)
+.then(snapshot => {
+
+return snapshot.ref.getDownloadURL();
+
 })
-.then(()=>{
-  alert("PRODUCTO CREADO");
+.then(url => {
+
+return db.collection("productos").add({
+nombre: nombre,
+precio: precio,
+stock: stock,
+imagen: url,
+tallas: ["S","M","L","XL"]
+});
+
 })
-.catch((err)=>{
-  alert("ERROR: " + err.message);
+.then(() => {
+
+alert("PRODUCTO CREADO CON IMAGEN");
+
+document.getElementById("nombre").value = "";
+document.getElementById("precio").value = "";
+document.getElementById("stock").value = "";
+document.getElementById("imagenFile").value = "";
+
+})
+.catch(error => {
+
+alert("ERROR: " + error.message);
+console.error(error);
+
 });
 
 }
