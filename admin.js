@@ -143,7 +143,7 @@ alert("ANTES STORAGE");
 
 const storageRef =
 firebase.storage().ref("productos/" + Date.now() + "_" + file.name);
-
+alert(file.name);
 storageRef.put(file)
 .then(()=>{
 alert("UPLOAD OK");
