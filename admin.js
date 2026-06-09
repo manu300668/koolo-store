@@ -132,39 +132,43 @@ const precio = Number(document.getElementById("precio").value);
 const stock = Number(document.getElementById("stock").value);
 const file = document.getElementById("imagenFile").files[0];
 
-if(!nombre || !precio || !stock){
-alert("Faltan datos");
-return;
-}
-
 if(!file){
 alert("Selecciona imagen");
 return;
 }
 
-// nombre único para evitar conflictos
-const fileName = "productos/" + Date.now() + "_" + file.name;
+const storageRef =
+firebase.storage().ref("productos/" + Date.now() + "_" + file.name);
 
-const storageRef = firebase.storage().ref().child(fileName);
+const uploadTask = storageRef.put(file);
 
-storageRef.put(file)
-.then(snapshot => {
+uploadTask.on("state_changed",
 
-return snapshot.ref.getDownloadURL();
+(snapshot)=>{
 
-})
-.then(url => {
+// progreso opcional
+
+},
+
+(error)=>{
+alert("ERROR STORAGE: " + error.message);
+},
+
+()=>{
+
+uploadTask.snapshot.ref.getDownloadURL()
+.then((url)=>{
 
 return db.collection("productos").add({
-nombre: nombre,
-precio: precio,
-stock: stock,
-imagen: url,
-tallas: ["S","M","L","XL"]
+nombre,
+precio,
+stock,
+imagen:url,
+tallas:["S","M","L","XL"]
 });
 
 })
-.then(() => {
+.then(()=>{
 
 alert("PRODUCTO CREADO CON IMAGEN");
 
@@ -173,13 +177,11 @@ document.getElementById("precio").value = "";
 document.getElementById("stock").value = "";
 document.getElementById("imagenFile").value = "";
 
-})
-.catch(error => {
-
-alert("ERROR: " + error.message);
-console.error(error);
-
 });
+
+}
+
+);
 
 }
 
