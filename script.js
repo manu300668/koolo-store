@@ -143,7 +143,8 @@ template.content
 clone.querySelector(
 ".producto-img"
 ).src =
-producto.imagen;
+producto.imagen ||
+"https://via.placeholder.com/400x400?text=KOOLO";
 
 
 // alt
