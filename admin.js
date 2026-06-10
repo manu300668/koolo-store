@@ -14,7 +14,6 @@ appId: "1:612039099714:web:38d14c2de43851c225c74db"
 firebase.initializeApp(firebaseConfig);
 alert("Bucket: " + firebase.app().options.storageBucket);
 
-alert(firebase.app().options.storageBucket);
 const db = firebase.firestore();
 
 // ==========================
@@ -129,27 +128,46 @@ snap.forEach((doc)=>{
 
 function crearProducto(){
 
-const file = document.getElementById("imagenFile").files[0];
+const nombre =
+document.getElementById("nombre").value;
 
-if(!file){
-  alert("No hay imagen");
-  return;
+const precio =
+Number(document.getElementById("precio").value);
+
+const stock =
+Number(document.getElementById("stock").value);
+
+const imagen =
+document.getElementById("imagenUrl").value;
+
+if(!nombre){
+alert("Introduce nombre");
+return;
 }
 
-alert("Archivo: " + file.name);
+db.collection("productos").add({
 
-firebase.storage()
-.ref("test/" + file.name)
-.put(file)
-.then(()=>{
-  alert("SUBIDA OK");
+nombre,
+precio,
+stock,
+imagen,
+tallas:["S","M","L","XL"]
+
 })
-.catch((error)=>{
-  alert(
-    "ERROR\n\n" +
-    "Código: " + error.code +
-    "\n\nMensaje: " + error.message
-  );
+.then(()=>{
+
+alert("Producto creado");
+
+document.getElementById("nombre").value = "";
+document.getElementById("precio").value = "";
+document.getElementById("stock").value = "";
+document.getElementById("imagenUrl").value = "";
+
+})
+.catch((err)=>{
+
+alert("Error: " + err.message);
+
 });
 
 }
