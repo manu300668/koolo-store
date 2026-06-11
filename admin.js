@@ -115,7 +115,7 @@ snap.forEach((doc)=>{
     <p>${p.total || 0} €</p>
 
     <p>
-Estado: ${p.estado || "Pendiente"}
+Estado: ${JSON.stringify(p.estado)}
 </p>
 
 <button onclick="cambiarEstado('${doc.id}','Enviado')">
