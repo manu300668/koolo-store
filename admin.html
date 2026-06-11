@@ -59,7 +59,23 @@ Entrar
   <div class="checkout-card">
 
 <h2>Crear producto</h2>
+<div id="editorProducto" class="checkout-card" style="display:none;">
 
+<h2>Editar producto</h2>
+
+<input id="editNombre" placeholder="Nombre">
+
+<input id="editPrecio" type="number" placeholder="Precio">
+
+<input id="editStock" type="number" placeholder="Stock">
+
+<input id="editImagen" placeholder="URL imagen">
+
+<button onclick="guardarEdicion()" class="btn-pagar">
+Guardar cambios
+</button>
+
+</div>
 <input id="nombre" placeholder="Nombre">
 <input id="precio" type="number" placeholder="Precio">
 <input id="stock" type="number" placeholder="Stock">
