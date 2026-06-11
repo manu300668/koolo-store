@@ -164,7 +164,8 @@ return;
 
 db.collection("productos").add({
 
-nombre,
+nombre
+descripcion,
 precio,
 stock,
 imagen,
