@@ -177,10 +177,6 @@ alert("Error: " + err.message);
 }
 
 // ==========================
-// BORRAR PRODUCTO
-// ==========================
-
-// ==========================
 // EDITAR PRODUCTO
 // ==========================
 
@@ -212,6 +208,57 @@ p.imagen || "";
 });
 
 }
+
+
+function guardarEdicion(){
+
+if(!productoEditando){
+return;
+}
+
+const nombre =
+document.getElementById("editNombre").value;
+
+const precio =
+Number(document.getElementById("editPrecio").value);
+
+const stock =
+Number(document.getElementById("editStock").value);
+
+const imagen =
+document.getElementById("editImagen").value;
+
+db.collection("productos")
+.doc(productoEditando)
+.update({
+
+nombre,
+precio,
+stock,
+imagen
+
+})
+.then(()=>{
+
+alert("Producto actualizado");
+
+document.getElementById("editorProducto").style.display =
+"none";
+
+productoEditando = null;
+
+})
+.catch((err)=>{
+
+alert("Error: " + err.message);
+
+});
+
+}
+// ==========================
+// BORRAR PRODUCTO
+// ==========================
+
 function borrarProd(id){
 
 if(confirm("¿Eliminar producto?")){
