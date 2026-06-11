@@ -145,6 +145,9 @@ function crearProducto(){
 const nombre =
 document.getElementById("nombre").value;
 
+const descripcion =
+document.getElementById("descripcion").value;
+
 const precio =
 Number(document.getElementById("precio").value);
 
