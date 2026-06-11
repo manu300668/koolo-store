@@ -272,3 +272,13 @@ db.collection("productos")
 }
 
 }
+document.addEventListener("input",(e)=>{
+
+if(e.target.id === "editImagen"){
+
+document.getElementById("previewImagen").src =
+e.target.value;
+
+}
+
+});
