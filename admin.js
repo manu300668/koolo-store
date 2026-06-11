@@ -74,9 +74,13 @@ snap.forEach((doc)=>{
 
     <p>Stock: ${p.stock || 0}</p>
 
-    <button onclick="borrarProd('${doc.id}')">
-      Eliminar
-    </button>
+  <button onclick="editarProd('${doc.id}')">
+  Editar
+</button>
+
+<button onclick="borrarProd('${doc.id}')">
+  Eliminar
+</button>
 
   </div>
 
