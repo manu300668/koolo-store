@@ -186,77 +186,28 @@ alert("Error: " + err.message);
 
 function editarProd(id){
 
+productoEditando = id;
+
 db.collection("productos")
 .doc(id)
 .get()
 .then((doc)=>{
 
-if(!doc.exists){
-alert("Producto no encontrado");
-return;
-}
-
 const p = doc.data();
 
-const nombre =
-prompt(
-"Nombre:",
-p.nombre || ""
-);
+document.getElementById("editorProducto").style.display = "block";
 
-if(nombre === null) return;
+document.getElementById("editNombre").value =
+p.nombre || "";
 
-const precio =
-Number(
-prompt(
-"Precio:",
-p.precio || 0
-)
-);
+document.getElementById("editPrecio").value =
+p.precio || 0;
 
-if(isNaN(precio)) return;
+document.getElementById("editStock").value =
+p.stock || 0;
 
-const stock =
-Number(
-prompt(
-"Stock:",
-p.stock || 0
-)
-);
-
-if(isNaN(stock)) return;
-
-const imagen =
-prompt(
-"URL imagen:",
-p.imagen || ""
-);
-
-if(imagen === null) return;
-
-db.collection("productos")
-.doc(id)
-.update({
-
-nombre,
-precio,
-stock,
-imagen
-
-})
-.then(()=>{
-
-alert("Producto actualizado");
-
-})
-.catch((err)=>{
-
-alert(
-"Error: " +
-err.message
-);
-
-});
+document.getElementById("editImagen").value =
+p.imagen || "";
 
 });
 
