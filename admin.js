@@ -12,7 +12,6 @@ appId: "1:612039099714:web:38d14c2de43851c225c74db"
 };
 
 firebase.initializeApp(firebaseConfig);
-alert("Bucket: " + firebase.app().options.storageBucket);
 
 const db = firebase.firestore();
 
