@@ -292,3 +292,26 @@ e.target.value;
 }
 
 });
+// ==========================
+// CAMBIAR ESTADO PEDIDO
+// ==========================
+
+function cambiarEstado(id, estado){
+
+db.collection("pedidos")
+.doc(id)
+.update({
+estado: estado
+})
+.then(()=>{
+
+alert("Estado actualizado");
+
+})
+.catch((err)=>{
+
+alert("Error: " + err.message);
+
+});
+
+}
