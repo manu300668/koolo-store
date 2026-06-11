@@ -114,7 +114,17 @@ snap.forEach((doc)=>{
 
     <p>${p.total || 0} €</p>
 
-    <p>${p.estado || "Pendiente"}</p>
+    <p>
+Estado: ${p.estado || "Pendiente"}
+</p>
+
+<button onclick="cambiarEstado('${doc.id}','Enviado')">
+Enviado
+</button>
+
+<button onclick="cambiarEstado('${doc.id}','Entregado')">
+Entregado
+</button>
 
   </div>
 
