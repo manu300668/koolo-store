@@ -14,6 +14,7 @@ appId: "1:612039099714:web:38d14c2de43851c225c74db"
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
+let productoEditando = null;
 
 // ==========================
 // LOGIN SIMPLE
