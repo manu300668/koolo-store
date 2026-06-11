@@ -205,10 +205,12 @@ p.stock || 0;
 document.getElementById("editImagen").value =
 p.imagen || "";
 
+document.getElementById("previewImagen").src =
+p.imagen || "";
+  
 });
 
 }
-
 
 function guardarEdicion(){
 
