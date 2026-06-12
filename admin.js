@@ -24,26 +24,25 @@ let productoEditando = null;
 // LOGIN SIMPLE
 // ==========================
 
-function login() {
+function login(){
 
-  const user = document.getElementById("user").value;
-  const pass = document.getElementById("pass").value;
+const user = document.getElementById("user").value;
+const pass = document.getElementById("pass").value;
 
-  if (user === "koolo" && pass === "Manu68.") {
+if(user === "koolo" && pass === "Manu68."){
 
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("adminPanel").style.display = "block";
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("adminPanel").style.display = "block";
 
-    cargarAdmin();
+cargarAdmin();
 
-  } else {
+}else{
 
-    alert("Error login");
-
-  }
+alert("Usuario o contraseña incorrectos");
 
 }
 
+}
 
 // ==========================
 // CARGAR PANEL
