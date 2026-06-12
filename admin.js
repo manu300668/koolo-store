@@ -84,10 +84,6 @@ function cargarAdmin() {
           Eliminar
         </button>
 
-        <button onclick="borrarPedido('${doc.id}')">
-         Eliminar
-        </button>
-
        </div>
 
       `;
@@ -133,6 +129,10 @@ Ver detalle
         <button onclick="cambiarEstado('${doc.id}','Entregado')">
           Entregado
         </button>
+
+        <button onclick="borrarPedido('${doc.id}')">
+Eliminar
+</button>
 
       </div>
 
