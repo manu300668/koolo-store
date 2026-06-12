@@ -214,7 +214,7 @@ total += i.precio * i.cantidad;
 // pedido ID
 
 const referencia =
-"KO-" + Date.now().toString().slice(-6);
+"KOOLO-" + Date.now().toString().slice(-6);
 
 
 // guardar pedido
