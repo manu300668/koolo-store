@@ -349,3 +349,24 @@ function cambiarEstado(id, estado) {
     });
 
 }
+function verPedido(p){
+
+let productosTexto = "";
+
+p.productos.forEach(prod=>{
+productosTexto += `
+- ${prod.nombre} (${prod.talla}) x${prod.cantidad}
+`;
+});
+
+alert(
+"PEDIDO: " + p.referenciaPedido +
+"\n\nCLIENTE: " + p.cliente.nombre +
+"\nTEL: " + p.cliente.telefono +
+"\nEMAIL: " + p.cliente.email +
+"\nDIRECCIÓN: " + p.cliente.direccion +
+"\n\nPRODUCTOS:\n" + productosTexto +
+"\n\nTOTAL: " + p.total + " €"
+);
+
+}
