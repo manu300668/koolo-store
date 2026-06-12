@@ -26,23 +26,7 @@ let productoEditando = null;
 // ==========================
 
 function login(){
-
-const user = document.getElementById("user").value;
-const pass = document.getElementById("pass").value;
-
-if(user === "koolo" && pass === "Manu68."){
-
-document.getElementById("loginBox").style.display = "none";
-document.getElementById("adminPanel").style.display = "block";
-
-cargarAdmin();
-
-}else{
-
-alert("Usuario o contraseña incorrectos");
-
-}
-
+alert("LOGIN FUNCIONA");
 }
 
 // ==========================
