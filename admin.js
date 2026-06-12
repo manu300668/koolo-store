@@ -303,6 +303,10 @@ function guardarEdicion() {
 
 function borrarPedido(id){
 
+alert("CLICK OK: " + id);
+
+}
+
 console.log("Intentando borrar pedido:", id);
 
 if(!id){
