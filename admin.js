@@ -301,15 +301,30 @@ function guardarEdicion() {
 // BORRAR PRODUCTO
 // ==========================
 
-function borrarProd(id) {
+function borrarPedido(id){
 
-  if (confirm("¿Eliminar producto?")) {
+console.log("Intentando borrar pedido:", id);
 
-    db.collection("productos")
-      .doc(id)
-      .delete();
+if(!id){
+alert("ID no válido");
+return;
+}
 
-  }
+if(confirm("¿Seguro que quieres eliminar este pedido?")){
+
+db.collection("pedidos")
+.doc(id)
+.delete()
+.then(()=>{
+alert("Pedido eliminado");
+console.log("Eliminado OK");
+})
+.catch((err)=>{
+alert("Error al eliminar: " + err.message);
+console.error(err);
+});
+
+}
 
 }
 
