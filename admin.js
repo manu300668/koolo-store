@@ -388,7 +388,7 @@ alert(
 
 }
 console.log("admin.js cargado correctamente");
-}
+
 function borrarProd(id){
 
 if(!confirm("¿Eliminar producto?")) return;
