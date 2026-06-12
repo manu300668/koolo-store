@@ -95,54 +95,57 @@ function cargarAdmin() {
 
   // PEDIDOS
 
-  db.collection("pedidos").onSnapshot((snap) => {
+  db.collection("pedidos").onSnapshot((snap)=>{
 
-    const cont =
-      document.getElementById("pedidosAdmin");
+const cont = document.getElementById("pedidosAdmin");
 
-    if (!cont) return;
+if(!cont) return;
 
-    cont.innerHTML = "";
+cont.innerHTML = "";
 
-    snap.forEach((doc) => {
+snap.forEach((doc)=>{
 
-      const p = doc.data();
+const p = doc.data();
 
-      cont.innerHTML += `
+let colorEstado = "#999";
 
-      <div class="checkout-card">
+if(p.estado === "Enviado") colorEstado = "#2196f3";
+if(p.estado === "Entregado") colorEstado = "#4caf50";
+if(p.estado === "pendiente") colorEstado = "#ff9800";
 
-        <h3>${p.referenciaPedido || "Pedido"}</h3>
+cont.innerHTML += `
 
-<button onclick='verPedido(${JSON.stringify(doc.data())})'>
-Ver detalle
-</button>
+<div class="checkout-card" style="border-left:6px solid ${colorEstado}">
 
-        <p>${p.total || 0} €</p>
+  <h3>${p.referenciaPedido || "Pedido"}</h3>
 
-        <p>Estado: ${p.estado || ""}</p>
+  <p><b>Total:</b> ${p.total || 0} €</p>
 
-        <button onclick="cambiarEstado('${doc.id}','Enviado')">
-          Enviado
-        </button>
+  <p><b>Estado:</b> ${p.estado || "pendiente"}</p>
 
-        <button onclick="cambiarEstado('${doc.id}','Entregado')">
-          Entregado
-        </button>
+  <button onclick="verPedido(${JSON.stringify(doc.data())})">
+    Ver detalle
+  </button>
 
-        <button onclick="borrarPedido('${doc.id}')">
-          Eliminar
-        </button>
+  <button onclick="cambiarEstado('${doc.id}','Enviado')">
+    Enviado
+  </button>
 
-      </div>
+  <button onclick="cambiarEstado('${doc.id}','Entregado')">
+    Entregado
+  </button>
 
-      `;
+  <button onclick="borrarPedido('${doc.id}')">
+    Eliminar
+  </button>
 
-    });
+</div>
 
-  });
+`;
 
-}
+});
+
+});
 
 
 // ==========================
