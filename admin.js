@@ -114,6 +114,10 @@ function cargarAdmin() {
 
         <h3>${p.referenciaPedido || "Pedido"}</h3>
 
+<button onclick='verPedido(${JSON.stringify(doc.data())})'>
+Ver detalle
+</button>
+
         <p>${p.total || 0} €</p>
 
         <p>Estado: ${p.estado || ""}</p>
