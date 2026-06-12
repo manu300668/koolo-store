@@ -383,3 +383,24 @@ alert(
 );
 
 }
+function verPedido(p){
+
+let productos = "";
+
+p.productos.forEach(item=>{
+productos += `
+• ${item.nombre} (${item.talla}) x${item.cantidad}
+`;
+});
+
+alert(
+"PEDIDO: " + p.referenciaPedido +
+"\n\nCLIENTE: " + p.cliente.nombre +
+"\nTEL: " + p.cliente.telefono +
+"\nEMAIL: " + p.cliente.email +
+"\nDIRECCIÓN: " + p.cliente.direccion +
+"\n\nPRODUCTOS:\n" + productos +
+"\n\nTOTAL: " + p.total + " €"
+);
+
+}
