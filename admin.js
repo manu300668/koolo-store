@@ -388,3 +388,19 @@ alert(
 
 }
 console.log("admin.js cargado correctamente");
+}
+function borrarProd(id){
+
+if(!confirm("¿Eliminar producto?")) return;
+
+db.collection("productos")
+.doc(id)
+.delete()
+.then(()=>{
+alert("Producto eliminado");
+})
+.catch((err)=>{
+alert("Error: " + err.message);
+});
+
+}
