@@ -131,8 +131,8 @@ Ver detalle
         </button>
 
         <button onclick="borrarPedido('${doc.id}')">
-Eliminar
-</button>
+          Eliminar
+        </button>
 
       </div>
 
