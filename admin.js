@@ -13,6 +13,7 @@ const firebaseConfig = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
+  alert("admin.js cargado");
 }
 
 const db = firebase.firestore();
