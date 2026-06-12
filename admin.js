@@ -303,32 +303,19 @@ function guardarEdicion() {
 
 function borrarPedido(id){
 
-alert("CLICK OK: " + id);
-
-}
-
-console.log("Intentando borrar pedido:", id);
-
-if(!id){
-alert("ID no válido");
-return;
-}
-
-if(confirm("¿Seguro que quieres eliminar este pedido?")){
+if(!confirm("¿Seguro que quieres eliminar este pedido?")) return;
 
 db.collection("pedidos")
 .doc(id)
 .delete()
 .then(()=>{
-alert("Pedido eliminado");
-console.log("Eliminado OK");
+alert("Pedido eliminado correctamente");
+cargarAdmin(); // refresca lista
 })
 .catch((err)=>{
 alert("Error al eliminar: " + err.message);
 console.error(err);
 });
-
-}
 
 }
 
