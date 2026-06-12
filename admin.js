@@ -403,3 +403,4 @@ alert(
 );
 
 }
+console.log("admin.js cargado correctamente");
