@@ -269,6 +269,8 @@ renderCheckout();
 
 alert("Pedido realizado. Ahora realiza el pago por Bizum al 654056391 y te confirmaremos el envío.");
 
+  window.location.href =
+"https://wa.me/34XXXXXXXXX?text=Hola%20he%20realizado%20un%20pedido%20en%20Koolo%20y%20quiero%20confirmarlo";
 window.location.href = "index.html";
 
 }
