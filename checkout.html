@@ -99,5 +99,30 @@ Pagar
 
 <script src="checkout.js"></script>
 
+  <div id="pedidoConfirmado" style="display:none; text-align:center; padding:30px;">
+
+  <div class="checkout-card">
+
+    <h2>🎉 Pedido confirmado</h2>
+
+    <p>Tu número de pedido es:</p>
+
+    <h3 id="numeroPedido"></h3>
+
+    <p>Te contactaremos para confirmar el envío.</p>
+
+    <p>Pago por Bizum al: <b>6XX XXX XXX</b></p>
+
+    <a id="whatsappLink" target="_blank" class="btn-pagar">
+      Confirmar por WhatsApp
+    </a>
+
+    <br><br>
+
+    <button onclick="volverTienda()" class="btn-pagar">
+      Volver a la tienda
+    </button>
+
+  </div>
 </body>
 </html>
