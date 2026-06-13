@@ -285,6 +285,9 @@ document.getElementById("whatsappLink").href =
 carrito = [];
 localStorage.removeItem("carrito");
 
+  function volverTienda(){
+window.location.href = "index.html";
+  
 }
 
 
