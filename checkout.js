@@ -236,7 +236,7 @@ productos: carrito,
 
 total,
 
-estado:"pendiente",
+estado: "Pendiente de pago",
 
 fecha: Date.now()
 
