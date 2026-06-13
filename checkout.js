@@ -267,7 +267,7 @@ carrito = [];
 
 renderCheckout();
 
-alert("Pedido realizado");
+alert("Pedido realizado. Ahora realiza el pago por Bizum al 654056391 y te confirmaremos el envío.");
 
 window.location.href = "index.html";
 
