@@ -69,25 +69,40 @@ function cargarAdmin() {
 
       const p = doc.data();
 
-      cont.innerHTML += `
+      cont.innerHTML +=
 
-      <div class="checkout-card">
+<div class="checkout-card">
 
-        <h3>${p.nombre || ""}</h3>
+  <img
+    src="${p.imagen || ''}"
+    style="
+      width:80px;
+      height:80px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-bottom:10px;
+    "
+  >
 
-        <p>${p.precio || 0} €</p>
+  <h3>${p.nombre || ""}</h3>
 
-        <p>Stock: ${p.stock || 0}</p>
+  <p>${p.precio || 0} €</p>
 
-        <button onclick="editarProd('${doc.id}')">
-          Editar
-        </button>
+  <p>Stock: ${p.stock || 0}</p>
 
-        <button onclick="borrarProd('${doc.id}')">
-          Eliminar
-        </button>
+  <p>${p.descripcion || ""}</p>
 
-       </div>
+  <button onclick="editarProd('${doc.id}')">
+    Editar
+  </button>
+
+  <button onclick="borrarProd('${doc.id}')">
+    Eliminar
+  </button>
+
+</div>
+
+`;
 
       `;
 
