@@ -267,10 +267,23 @@ carrito = [];
 
 renderCheckout();
 
-alert("Pedido realizado. Ahora realiza el pago por Bizum al 654056391 y te confirmaremos el envío.");
+// generar número pedido
+const referencia = "KO-" + Date.now().toString().slice(-6);
 
-  window.location.href =
-"https://wa.me/34XXXXXXXXX?text=Hola%20he%20realizado%20un%20pedido%20en%20Koolo%20y%20quiero%20confirmarlo";
+// mostrar pantalla confirmación
+document.getElementById("checkoutCarrito").style.display = "none";
+document.getElementById("pedidoConfirmado").style.display = "block";
+
+// mostrar número pedido
+document.getElementById("numeroPedido").innerText = referencia;
+
+// link whatsapp
+document.getElementById("whatsappLink").href =
+"https://wa.me/34654056391?text=Hola%20he%20realizado%20el%20pedido%20" + referencia;
+
+// limpiar carrito visualmente
+carrito = [];
+localStorage.removeItem("carrito");
 
 }
 
