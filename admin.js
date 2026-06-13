@@ -69,28 +69,15 @@ function cargarAdmin() {
 
       const p = doc.data();
 
-      cont.innerHTML +=
+      cont.innerHTML += `
 
 <div class="checkout-card">
-
-  <img
-    src="${p.imagen || ''}"
-    style="
-      width:80px;
-      height:80px;
-      object-fit:cover;
-      border-radius:8px;
-      margin-bottom:10px;
-    "
-  >
 
   <h3>${p.nombre || ""}</h3>
 
   <p>${p.precio || 0} €</p>
 
   <p>Stock: ${p.stock || 0}</p>
-
-  <p>${p.descripcion || ""}</p>
 
   <button onclick="editarProd('${doc.id}')">
     Editar
@@ -101,8 +88,6 @@ function cargarAdmin() {
   </button>
 
 </div>
-
-`;
 
       `;
 
