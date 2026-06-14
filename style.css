@@ -525,3 +525,12 @@ margin-top:15px;
   margin-top:-10px;
   font-family:"Trebuchet MS", sans-serif;
 }
+.info-banner{
+  text-align:center;
+  background:#111;
+  color:white;
+  padding:8px;
+  font-size:13px;
+  letter-spacing:1px;
+  font-weight:500;
+}
