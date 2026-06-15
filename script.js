@@ -126,7 +126,14 @@ db.collection("productos")
 container.innerHTML = "";
 
 snapshot.forEach(doc=>{
+const producto = doc.data();
 
+if(
+categoriaActual !== "todos" &&
+producto.categoria !== categoriaActual
+){
+return;
+}
 const producto =
 doc.data();
 
