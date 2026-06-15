@@ -175,8 +175,6 @@ container.appendChild(clone);
 
 });
 
-});
-
 }
 
 
