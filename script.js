@@ -28,7 +28,7 @@ let carrito =
 JSON.parse(
 localStorage.getItem("carrito")
 ) || [];
-let categoriaActual = "todos";
+let categoriaActual = "culote";
 
 // ==========================
 // GUARDAR CARRITO
