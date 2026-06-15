@@ -388,7 +388,13 @@ window.location.href =
 
 }
 
+function filtrarCategoria(categoria){
 
+categoriaActual = categoria;
+
+cargarProductos();
+
+}
 // ==========================
 // INIT
 // ==========================
