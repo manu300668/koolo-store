@@ -317,7 +317,7 @@ window.location.href =
 
 }
 
-function filtrarCategoria(categoria){
+function filtrarCategoria(cat){
 
 categoriaActual = cat;
 
