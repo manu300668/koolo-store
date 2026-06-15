@@ -319,7 +319,7 @@ window.location.href =
 
 function filtrarCategoria(categoria){
 
-categoriaActual = categoria;
+categoriaActual = cat;
 
 cargarProductos();
 
