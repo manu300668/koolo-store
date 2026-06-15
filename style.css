@@ -534,3 +534,11 @@ margin-top:15px;
   letter-spacing:1px;
   font-weight:500;
 }
+#descripcion,
+#editDescripcion{
+  width:100%;
+  min-height:120px;
+  padding:10px;
+  box-sizing:border-box;
+  resize:vertical;
+}
