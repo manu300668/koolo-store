@@ -122,9 +122,9 @@ snapshot.forEach(doc=>{
 
 const producto = doc.data();
 
-if(producto.categoria !== categoriaActual){
-return;
-}
+// if(producto.categoria !== categoriaActual){
+//   return;
+// }
 
 const stock = Number(producto.stock || 0);
 
