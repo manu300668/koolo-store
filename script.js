@@ -109,14 +109,7 @@ guardarCarrito();
 function cargarProductos(){
 
 const container =
-document.getElementById(
-"productosContainer"
-);
-
-const template =
-document.getElementById(
-"productoTemplate"
-);
+document.getElementById("productosContainer");
 
 if(!container) return;
 
@@ -126,123 +119,59 @@ db.collection("productos")
 container.innerHTML = "";
 
 snapshot.forEach(doc=>{
+
 const producto = doc.data();
 
-if(
-categoriaActual !== "todos" &&
-producto.categoria !== categoriaActual
-){
+if(producto.categoria !== categoriaActual){
 return;
 }
 
-const stock =
-Number(producto.stock || 0);
+const stock = Number(producto.stock || 0);
 
 const clone =
-template.content
-.cloneNode(true);
-
+document.getElementById("productoTemplate")
+.content.cloneNode(true);
 
 // imagen
-
-clone.querySelector(
-".producto-img"
-).src =
-producto.imagen ||
-"https://via.placeholder.com/400x400?text=KOOLO";
-
-
-// alt
-
-clone.querySelector(
-".producto-img"
-).alt =
-producto.nombre;
-
+clone.querySelector(".producto-img").src =
+producto.imagen || "";
 
 // nombre
-
-clone.querySelector(
-".producto-nombre"
-).innerText =
+clone.querySelector(".producto-nombre").innerText =
 producto.nombre;
 
-
-// descripción
-
-clone.querySelector(
-".producto-descripcion"
-).innerText =
+// descripcion
+clone.querySelector(".producto-descripcion").innerText =
 producto.descripcion || "";
 
-
 // precio
-
-clone.querySelector(
-".precio"
-).innerText =
-
-Number(producto.precio)
-.toFixed(2)
-
-+ " €";
-
+clone.querySelector(".precio").innerText =
+Number(producto.precio).toFixed(2) + " €";
 
 // stock
-
-clone.querySelector(
-".stock-text"
-).innerText =
-
+clone.querySelector(".stock-text").innerText =
 "Stock: " + stock;
 
-
 // talla
-
 const tallaSelect =
-clone.querySelector(
-".talla-select"
-);
+clone.querySelector(".talla-select");
 
+// boton
+clone.querySelector(".btn-comprar")
+.addEventListener("click", ()=>{
 
-// botón comprar
-
-const botonComprar =
-clone.querySelector(
-".btn-comprar"
-);
-
-botonComprar.addEventListener(
-"click",
-
-()=>{
-
-const talla =
-tallaSelect.value;
+const talla = tallaSelect.value;
 
 if(!talla){
-
-mostrarToast(
-"Selecciona talla"
-);
-
+mostrarToast("Selecciona talla");
 return;
-
 }
 
-sumarProducto(
-doc.id,
-producto,
-talla
-);
+sumarProducto(doc.id, producto, talla);
 
-}
+});
 
-);
-
-container.appendChild(
-clone
-);
+container.appendChild(clone);
 
 });
 
