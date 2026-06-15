@@ -134,8 +134,6 @@ producto.categoria !== categoriaActual
 ){
 return;
 }
-const producto =
-doc.data();
 
 const stock =
 Number(producto.stock || 0);
