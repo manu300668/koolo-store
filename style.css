@@ -131,8 +131,9 @@ padding:40px 20px;
 }
 
 .productos-section h2{
-font-size:2rem;
-margin-bottom:25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 800;
 }
 
 
