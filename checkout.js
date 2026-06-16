@@ -274,7 +274,6 @@ carrito = [];
 renderCheckout();
 
 // generar número pedido
-const referencia = "koolo-" + Date.now().toString().slice(-6);
 
 // mostrar pantalla confirmación
 document.getElementById("checkoutCarrito").style.display = "none";
