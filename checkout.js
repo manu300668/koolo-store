@@ -1,4 +1,4 @@
-alert("checkout.js cargado");
+
 // ==========================
 // FIREBASE
 // ==========================
@@ -27,7 +27,6 @@ const db = firebase.firestore();
 
 let carrito =
 JSON.parse(localStorage.getItem("carrito")) || [];
-alert("Carrito: " + JSON.stringify(carrito));
 
 // ==========================
 // GUARDAR CARRITO
@@ -269,7 +268,7 @@ carrito = [];
 renderCheckout();
 
 // generar número pedido
-const referencia = "KO-" + Date.now().toString().slice(-6);
+const referencia = "koolo-" + Date.now().toString().slice(-6);
 
 // mostrar pantalla confirmación
 document.getElementById("checkoutCarrito").style.display = "none";
