@@ -258,7 +258,7 @@ await db.collection("productos")
 .update({
 
 stock:
-firebase.firestore.FieldValue.increment(-item.cantidad)
+firebase.firestore.FieldValue.increment(-item.cantidad);
 
 });
 
