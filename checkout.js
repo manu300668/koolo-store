@@ -25,8 +25,14 @@ const db = firebase.firestore();
 // CARRITO
 // ==========================
 
-let carrito =
-JSON.parse(localStorage.getItem("carrito")) || [];
+carrito = [];
+localStorage.removeItem("carrito");
+
+}
+
+function volverTienda(){
+  window.location.href = "index.html";
+}
 
 // ==========================
 // GUARDAR CARRITO
