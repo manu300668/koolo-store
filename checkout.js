@@ -295,4 +295,8 @@ window.location.href = "index.html";
 // INIT
 // ==========================
 
-document.addEventListener("DOMContentLoaded", renderCheckout);
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("INIT CHECKOUT");
+  console.log(carrito);
+  renderCheckout();
+});
