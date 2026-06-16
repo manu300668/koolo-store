@@ -27,7 +27,7 @@ const db = firebase.firestore();
 let carrito =
 JSON.parse(localStorage.getItem("carrito")) || [];
 
-console.log("Carrito cargado:", carrito);
+alert("Productos en carrito: " + carrito.length);
 
 // ==========================
 // GUARDAR CARRITO
