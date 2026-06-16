@@ -284,7 +284,7 @@ document.getElementById("whatsappLink").href =
 // limpiar carrito visualmente
 carrito = [];
 localStorage.removeItem("carrito");
-
+}// 
   function volverTienda(){
 window.location.href = "index.html";
   
