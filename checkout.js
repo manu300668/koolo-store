@@ -245,6 +245,9 @@ document.getElementById("whatsappLink").href =
 
 }
 
+function volverTienda(){
+  window.location.href = "index.html";
+}
 
 // ==========================
 // INIT
