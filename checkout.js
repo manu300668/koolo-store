@@ -25,14 +25,8 @@ const db = firebase.firestore();
 // CARRITO
 // ==========================
 
-carrito = [];
-localStorage.removeItem("carrito");
-
-}
-
-function volverTienda(){
-  window.location.href = "index.html";
-}
+let carrito =
+JSON.parse(localStorage.getItem("carrito")) || [];
 
 // ==========================
 // GUARDAR CARRITO
