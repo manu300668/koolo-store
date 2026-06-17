@@ -186,113 +186,63 @@ async function crearPedido(){
 
 if(carrito.length === 0) return;
 
-
 // datos cliente
-
-const nombre =
-document.getElementById("nombre").value;
-
-const telefono =
-document.getElementById("telefono").value;
-
-const direccion =
-document.getElementById("direccion").value;
-
-const ciudad =
-document.getElementById("ciudad").value;
-
-const codigoPostal =
-document.getElementById("codigoPostal").value;
-
-const email =
-document.getElementById("email").value;
-
+const nombre = document.getElementById("nombre").value;
+const telefono = document.getElementById("telefono").value;
+const direccion = document.getElementById("direccion").value;
+const ciudad = document.getElementById("ciudad").value;
+const codigoPostal = document.getElementById("codigoPostal").value;
+const email = document.getElementById("email").value;
 
 // total
-
 let total = 0;
-
 carrito.forEach(i=>{
-total += i.precio * i.cantidad;
+  total += i.precio * i.cantidad;
 });
 
-
-// pedido ID
-
-const referencia =
-"koolo-" + Date.now().toString().slice(-6);
-
+// referencia (SOLO UNA)
+const referencia = "KO-" + Date.now().toString().slice(-6);
 
 // guardar pedido
-
 await db.collection("pedidos").add({
-
-referenciaPedido: referencia,
-
-cliente:{
-nombre,
-telefono,
-direccion,
-ciudad,
-codigoPostal,
-email
-},
-
-productos: carrito,
-
-total,
-
-estado: "Pendiente de pago",
-
-fecha: Date.now()
-
+  referenciaPedido: referencia,
+  cliente:{
+    nombre,
+    telefono,
+    direccion,
+    ciudad,
+    codigoPostal,
+    email
+  },
+  productos: carrito,
+  total,
+  estado: "Pendiente de pago",
+  fecha: Date.now()
 });
-
 
 // descontar stock
-
 for(let item of carrito){
-
-await db.collection("productos")
-.doc(item.id)
-.update({
-
-stock:
-firebase.firestore.FieldValue.increment(-item.cantidad)
-
-});
-
+  await db.collection("productos")
+  .doc(item.id)
+  .update({
+    stock: firebase.firestore.FieldValue.increment(-item.cantidad)
+  });
 }
 
-
-// limpiar
-
+// limpiar carrito
 localStorage.removeItem("carrito");
-
 carrito = [];
-
 renderCheckout();
 
-// generar número pedido
-
-// mostrar pantalla confirmación
+// mostrar confirmación
 document.getElementById("checkoutCarrito").style.display = "none";
 document.getElementById("pedidoConfirmado").style.display = "block";
 
-// mostrar número pedido
 document.getElementById("numeroPedido").innerText = referencia;
 
-// link whatsapp
 document.getElementById("whatsappLink").href =
 "https://wa.me/34654056391?text=Hola%20he%20realizado%20el%20pedido%20" + referencia;
 
-// limpiar carrito visualmente
-carrito = [];
-localStorage.removeItem("carrito");
-}// 
-  function volverTienda(){
-window.location.href = "index.html";
-  
 }
 
 
